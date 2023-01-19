@@ -29,15 +29,15 @@ services:
       - rdp
     volumes:
       - ./pgadmin:/var/lib/pgadmin
-  # django:
-  #   build: ./backend
-  #   ports: 
-  #     - "8000:8000"
-  #   command: ./manage.py runserver
-  #   depends_on:
-  #     - db
-  #   networks:
-  #     - rdp
+  django:
+    build: ./backend
+    ports: 
+      - "8000:8000"
+    command: ./manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+    networks:
+      - rdp
 
 networks:
   rdp:
