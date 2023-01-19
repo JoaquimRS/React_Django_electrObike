@@ -27,14 +27,14 @@ services:
       - rdp
     volumes:
       - ./pgadmin:/var/lib/pgadmin
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
-    environment:
-      GF_SECURITY_ADMIN_USER: root
-      GF_SECURITY_ADMIN_PASSWORD: "#2daw_JX"
-    networks:
-      - rdp
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     GF_SECURITY_ADMIN_USER: root
+  #     GF_SECURITY_ADMIN_PASSWORD: "#2daw_JX"
+  #   networks:
+  #     - rdp
 networks:
   rdp:
