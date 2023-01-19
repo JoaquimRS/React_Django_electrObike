@@ -7,8 +7,10 @@ services:
       POSTGRES_DB: joan-ximo
       POSTGRES_USER: root
       POSTGRES_PASSWORD: "#2daw_JX"
-    ports:
-      - "5432:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    expose:
+      - 5432
     networks:
       - rdp
   pgadmin:
@@ -23,6 +25,8 @@ services:
       - db
     networks:
       - rdp
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
   grafana:
     image: grafana/grafana
     ports:
