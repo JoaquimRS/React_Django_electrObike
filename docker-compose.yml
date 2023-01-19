@@ -1,14 +1,14 @@
 version: '3'
 services:
   db:
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: joan-ximo
+      POSTGRES_DB: electrobike
       POSTGRES_USER: root
       POSTGRES_PASSWORD: "#2daw_JX"
     volumes:
-      - ./database:/var/lib/postgresql/data
+      - ./database:/var/lib/postgresql/data:z
     expose:
       - 5432
     networks:
@@ -27,14 +27,5 @@ services:
       - rdp
     volumes:
       - ./pgadmin:/var/lib/pgadmin
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
-    environment:
-      GF_SECURITY_ADMIN_USER: root
-      GF_SECURITY_ADMIN_PASSWORD: "#2daw_JX"
-    networks:
-      - rdp
 networks:
   rdp:
