@@ -1,4 +1,4 @@
-import "./Home.css"
+import style from "./Home.css"
 import { Maps } from "../../components";
 // import { webView } from "react";
 
