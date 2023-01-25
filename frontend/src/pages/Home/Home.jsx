@@ -1,18 +1,13 @@
-import style from "./Home.css"
-import { Maps } from "../../components";
+import "./Home.css"
+import { Maps, Navbar } from "../../components";
 // import { webView } from "react";
 
 const Home = () => {
-
-    // window.onload = function () {
-    //     window.scrollTo(0, 1);
-    // }
-
     return (
-        <div className="map-container" onLoad={() => {
-            // window.scrollTo(0, 10);
-        }}>
+        <div className="map-container">
             <Maps />
+
+            <Navbar />
         </div>
     );
 }
