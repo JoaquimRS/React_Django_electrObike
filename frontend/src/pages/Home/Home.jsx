@@ -1,12 +1,12 @@
 import "./Home.css"
-import { Maps, Navbar } from "../../components";
+import { Maps, Navbar, ActMontior } from "../../components";
 // import { webView } from "react";
 
 const Home = () => {
     return (
         <div className="map-container">
+            <ActMontior />
             <Maps />
-
             <Navbar />
         </div>
     );
