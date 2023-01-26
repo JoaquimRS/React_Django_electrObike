@@ -1,24 +1,29 @@
 import './App.css';
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
   BrowserRouter,
   Routes,
   Route
 } from 'react-router-dom';
-
-const Home = lazy(() => import('./pages/Home'));
+import { Navbar } from './components';
+import Home from './pages/Home/Home';
+import { Profile, Notification } from './pages';
 
 function App() {
-
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} />
+      <Suspense >
+        <BrowserRouter>
+          <Routes>
+            <Route path={'/home'} element={<Home />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/notification' element={<Notification />} />
+            {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} /> */}
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+          <Navbar />
+        </BrowserRouter>
+      </Suspense>
     </div>
   );
 }

@@ -15,9 +15,8 @@ const Home = () => {
 
     return (
         <div className="map-container">
-            <ActMontior />
-            {stations.length > 0 ? <Maps stations={stations} /> : null}
-            <Navbar />
+            {/* <ActMontior /> */}
+            <Maps stations={stations} />
         </div>
     );
 }

@@ -1,17 +1,16 @@
 import { Marker } from 'react-map-gl';
 
-const CustomMarker = ({ latitude, longitude, name }) => {
+const CustomMarker = ({ item }) => {
 
     return (
         <Marker
-            latitude={latitude}
-            longitude={longitude}
-            anchor="bottom"
-
+            latitude={item.lat}
+            longitude={item.long}
+            anchor="center"
         >
             <div className="marker">
-                <p>{name}</p>
-                <img src="https://img.icons8.com/emoji/48/000000/round-pushpin-emoji.png" alt="marker" />
+                <div>{item.name}</div>
+                <img src={item.img} alt="marker" width={50} />
             </div>
         </Marker>
     )
