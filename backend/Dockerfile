@@ -16,6 +16,8 @@ COPY . .
 # Copiar los recorsos del entorno de construcción
 COPY --from=build-stage /root/.local/ /usr/local/
 
+RUN python3 manage.py migrate
+
 EXPOSE 8000
 
 CMD ["/bin/bash"]
