@@ -1,13 +1,15 @@
 import './App.css';
-import React from 'react';
+import React, { lazy } from 'react';
 import {
   BrowserRouter,
   Routes,
   Route
 } from 'react-router-dom';
-import { Home } from './pages';
+
+const Home = lazy(() => import('./pages/Home'));
 
 function App() {
+
   return (
     <div>
       <BrowserRouter>
