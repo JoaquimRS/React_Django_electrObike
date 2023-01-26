@@ -1,4 +1,4 @@
 electrobike_venv
 .env
 
-electrobike/__pycache__
+__pycache__
