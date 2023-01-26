@@ -1,6 +1,8 @@
 from django.db import models
 
 class Station(models.Model):
+    class Meta:
+        db_table = 'stations'
     id_station = models.CharField(max_length=25,primary_key=True)
     slug = models.CharField(max_length=100)
     name = models.CharField(max_length=100)

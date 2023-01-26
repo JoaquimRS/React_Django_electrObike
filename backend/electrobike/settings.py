@@ -68,7 +68,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000','http://0.0.0.0:8000', 'http://192.168.27.238:8000'
+    'http://localhost:3000','http://0.0.0.0:3000'
 )
 
 ROOT_URLCONF = 'electrobike.urls'
