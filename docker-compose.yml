@@ -9,8 +9,8 @@ services:
       POSTGRES_PASSWORD: "#2daw_JX"
     volumes:
       - ./database:/var/lib/postgresql/data:z
-    expose:
-      - 5432
+    ports:
+      - "5432:5432"
     networks:
       - rdp
   # pgadmin:
