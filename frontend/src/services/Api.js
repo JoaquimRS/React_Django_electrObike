@@ -5,7 +5,11 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 const API_ROOT = "http://localhost:8000/api";
 
-const Api = {
+const responseBody = res => {
+    return res;
+};
+
+const response = {
     get: url =>
         superagent.get(`${API_ROOT}${url}`).then(responseBody),
     del: url =>
@@ -16,4 +20,4 @@ const Api = {
         superagent.post(`${API_ROOT}${url}`, body).then(responseBody),
 }
 
-export default Api
+export default response

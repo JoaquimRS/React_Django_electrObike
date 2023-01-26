@@ -13,23 +13,23 @@ services:
       - "5432:5432"
     networks:
       - rdp
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   restart: always
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: joan_ximo@gmail.com
-  #     PGADMIN_DEFAULT_PASSWORD: "#2daw_JX"
-  #   ports:
-  #     - "5050:80"
-  #   depends_on:
-  #     - db
-  #   networks:
-  #     - rdp
-  #   volumes:
-  #     - ./pgadmin:/var/lib/pgadmin
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: joan_ximo@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: "#2daw_JX"
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - rdp
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
   django:
     build: ./backend
-    ports: 
+    ports:
       - "8000:8000"
     command: ./manage.py runserver 0.0.0.0:8000
     depends_on:
