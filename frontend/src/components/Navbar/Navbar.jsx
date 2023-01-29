@@ -1,11 +1,8 @@
-import { ReactComponent as Bell } from '../../assets/icons/bell.svg'
-import { ReactComponent as Map } from '../../assets/icons/map.svg'
-import { ReactComponent as User } from '../../assets/icons/user.svg'
-
+import Bell from '../../assets/icons/Bell'
+import MapIcon from '../../assets/icons/Map'
+import User from '../../assets/icons/User'
 import { useLocation, Link } from 'react-router-dom'
-
 import './Navbar.css'
-import { startTransition } from 'react'
 const Navbar = () => {
 
     const location = useLocation()
@@ -17,7 +14,7 @@ const Navbar = () => {
                     <Bell />
                 </Link>
                 <Link to="/home" className={location.pathname === '/home' ? 'active' : null}>
-                    <Map />
+                    <MapIcon />
                 </Link>
                 <Link to="/profile" className={location.pathname === '/profile' ? 'active' : null}>
                     <User />

@@ -7,11 +7,11 @@ import stations_service from "../../services/stations_service";
 const Home = () => {
 
     const [stations, setStations] = useState([])
-    useEffect(() => {
-        stations_service.getStations().then((res) => {
-            setStations(res.body)
-        })
-    }, [])
+    // useEffect(() => {
+    //     stations_service.getStations().then((res) => {
+    //         setStations(res.body)
+    //     })
+    // }, [])
 
     return (
         <div className="map-container">
