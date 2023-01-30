@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'electrobike.apps.stations'
+    'electrobike.apps.stations',
+    # 'electrobike.apps.slots'
 ]
 
 MIDDLEWARE = [
