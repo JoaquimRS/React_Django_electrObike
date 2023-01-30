@@ -1,17 +1,13 @@
 import "./Home.css"
-import { Maps, Navbar, ActMontior } from "../../components";
-import { useEffect, useState } from "react";
-import stations_service from "../../services/stations_service";
+import { Maps, ActMontior } from "../../components";
+import useStations from "../../hooks/useStations";
 // import { webView } from "react";
 
 const Home = () => {
 
-    const [stations, setStations] = useState([])
-    // useEffect(() => {
-    //     stations_service.getStations().then((res) => {
-    //         setStations(res.body)
-    //     })
-    // }, [])
+    const { stations } = useStations()
+    // const stations = []
+    console.count('stations');
 
     return (
         <div className="map-container">
