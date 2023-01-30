@@ -10,7 +10,10 @@ class Station(viewsets.GenericViewSet):
         return Response(serializer,status=status.HTTP_200_OK)
     def addStation(self, request):
         response = StationSerializer.addStation(request.data)
-        if response:
-            return Response(data=response, status=status.HTTP_201_CREATED)
-        else:
-            return Response(data="No se ha podido crear la estacion", status=status.HTTP_501_NOT_IMPLEMENTED)
+        return Response(data=response, status=status.HTTP_201_CREATED)
+    def deleteStation(self, request, idStation):
+        response = StationSerializer.deleteStation(idStation)
+        return Response(data=response, status=status.HTTP_200_OK)
+    def updateStation(self, request, idStation):
+        response = StationSerializer.updateStation(idStation, request.data)
+        return Response(data=response, status=status.HTTP_200_OK)

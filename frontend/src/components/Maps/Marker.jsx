@@ -11,7 +11,7 @@ const CustomMarker = ({ latitude, longitude, name }) => {
         >
             <div className="marker">
                 <p>{name}</p>
-                <img src="https://img.icons8.com/emoji/48/000000/round-pushpin-emoji.png" alt="marker" />
+                <img src="http://turismo.ontinyent.es/ontinyent/uploaded/Patrimonio/casa_del_consell_2.jpg" alt="marker" width={100}/>
             </div>
         </Marker>
     )

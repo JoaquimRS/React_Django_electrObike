@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Station
+from django.utils.text import slugify
 
 class StationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,4 +29,15 @@ class StationSerializer(serializers.ModelSerializer):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return newStation
-        
+    def deleteStation(idStation):
+        station = Station.objects.get(id_station=idStation)
+        return station.delete()
+    def updateStation(idStation, modStation):
+        response =  Station.objects.filter(id_station=idStation).update(
+            slug = slugify(modStation['name']),
+            name = modStation['name'],
+            lat = modStation['lat'],
+            long = modStation['long'],
+            img = modStation['img']
+        )
+        return response
