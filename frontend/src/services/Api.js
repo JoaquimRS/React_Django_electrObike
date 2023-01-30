@@ -5,7 +5,8 @@ let global = typeof window !== 'undefined' ? window : typeof global !== 'undefin
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = "http://localhost:8000/api";
+// const API_ROOT = "http://localhost:8000/api";
+const API_ROOT = "http://192.168.137.1:8000/api"
 
 const responseBody = res => {
     return res;

@@ -64,11 +64,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000','http://0.0.0.0:3000', "http://127.0.0.1:3000"
+    'http://localhost:3000','http://0.0.0.0:3000', "http://127.0.0.1:3000", "http://192.168.137.1:3000",
+    'http://192.168.27.45:3000', 'http://172.31.112.1:3000'
 )
 
 ROOT_URLCONF = 'electrobike.urls'
