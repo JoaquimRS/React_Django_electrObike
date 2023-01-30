@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Bike from '../../assets/icons/bike'
+import Bike from '../../assets/icons/Bike'
 
 const ActMontior = () => {
 
