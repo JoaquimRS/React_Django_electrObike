@@ -1,4 +1,4 @@
-import "./Home.css"
+import "./Home.scss"
 import { Maps, ActMontior } from "../../components";
 import useStations from "../../hooks/useStations";
 // import { webView } from "react";
@@ -6,8 +6,6 @@ import useStations from "../../hooks/useStations";
 const Home = () => {
 
     const { stations } = useStations()
-    // const stations = []
-    console.count('stations');
 
     return (
         <div className="map-container">
