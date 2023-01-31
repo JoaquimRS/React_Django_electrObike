@@ -9,7 +9,7 @@ const Home = () => {
 
     return (
         <div className="map-container">
-            {/* <ActMontior /> */}
+            <ActMontior />
             <Maps stations={stations} />
         </div>
     );

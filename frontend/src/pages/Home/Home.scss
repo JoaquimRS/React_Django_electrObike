@@ -15,36 +15,32 @@
     padding: 20px;
     display: flex;
     justify-content: space-between;
+
+    div:nth-child(1) {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        fill: white;
+
+        svg {
+            height: 75px;
+        }
+    }
+
+    div:nth-child(2) {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    h1 {
+        margin: 0;
+        padding: 0;
+    }
 }
-
-.activity-monitor>div:nth-child(1) {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    fill: white;
-}
-
-.activity-monitor>div:nth-child(1)>svg {
-    height: 75px;
-}
-
-
-
-.activity-monitor>div:nth-child(2) {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 10px;
-}
-
-.activity-monitor h1 {
-    margin: 0;
-    padding: 0;
-}
-
-
 
 .marker {
     background-color: white;
@@ -55,31 +51,30 @@
     border-radius: 10px;
     min-width: 140px;
     transform: scale(1.2);
-}
 
-.marker::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
+    ::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: white transparent transparent transparent;
+    }
 }
 
 .container-img-and-bickes {
     display: flex;
     flex-direction: row;
     width: 100%;
-    /* justify-content: space-a; */
-}
 
-.container-img-and-bickes>img {
-    object-fit: cover;
-    object-position: center;
-    width: 60px;
-    border-radius: 5px;
+    img {
+        object-fit: cover;
+        object-position: center;
+        width: 60px;
+        border-radius: 5px;
+    }
 }
 
 .container-number-bikes {
@@ -90,26 +85,26 @@
     align-items: center;
     padding: 0 5px;
     box-sizing: border-box;
-}
 
-.container-number-bikes>div {
-    width: 100%;
-    padding: 1px 0;
-    display: flex;
-    justify-content: space-between
-}
+    div {
+        width: 100%;
+        padding: 1px 0;
+        display: flex;
+        justify-content: space-between;
 
-.container-number-bikes>div>svg {
-    width: 20px;
-}
+        svg {
+            width: 20px;
+        }
+    }
 
-.container-number-bikes>div:first-child {
-    fill: #4ED06B;
-    color: #4ED06B;
-    border-bottom: 1px gray solid;
-}
+    div:first-child {
+        fill: #4ED06B;
+        color: #4ED06B;
+        border-bottom: 1px gray solid;
+    }
 
-.container-number-bikes>div:last-child {
-    fill: grey;
-    color: gray;
+    div:last-child {
+        fill: grey;
+        color: gray;
+    }
 }

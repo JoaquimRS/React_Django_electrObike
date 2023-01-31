@@ -1,10 +1,16 @@
 import { Marker } from 'react-map-gl';
 import Bike from '../../assets/icons/Bike';
+import Dialog from '@mui/material/Dialog';
+import { useState } from 'react';
+import Electrodialog from './ElectroDialog';
+
 
 const CustomMarker = ({ item }) => {
 
+    const [open, setOpen] = useState(false);
+
     const handleOpen = () => {
-        console.log(item.id_station)
+        setOpen(old => !old)
     }
 
     return (
@@ -29,6 +35,7 @@ const CustomMarker = ({ item }) => {
                     </div>
                 </div>
             </div>
+            {open ? <Electrodialog open={open} handleOpen={handleOpen} item={item} /> : null}
         </Marker>
     )
 
