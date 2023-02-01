@@ -1,17 +1,42 @@
 import { Marker } from 'react-map-gl';
 import Bike from '../../assets/icons/Bike';
-import Dialog from '@mui/material/Dialog';
 import { useState } from 'react';
-import Electrodialog from './ElectroDialog';
+import ElectroDialog from './ElectroDialog';
 
 
 const CustomMarker = ({ item }) => {
 
     const [open, setOpen] = useState(false);
 
-    const handleOpen = () => {
+    const handleModal = () => {
         setOpen(old => !old)
     }
+
+    const slots = [
+        {
+            id: 1,
+            used: true
+        },
+        {
+            id: 2,
+            used: false
+        },
+        {
+            id: 3,
+            used: true
+        },
+        {
+            id: 4,
+            used: false
+        },
+        {
+            id: 5,
+            used: false
+        },
+    ]
+
+    const usedBikes = slots.filter(slot => slot.used === true).length;
+    const freeBikes = slots.filter(slot => slot.used === false).length;
 
     return (
         <Marker
@@ -19,23 +44,23 @@ const CustomMarker = ({ item }) => {
             longitude={item.long}
             anchor="center"
         >
-            <div className="marker" onClick={() => handleOpen()}>
-                <div>{item.name}</div>
+            <div className="marker" onClick={() => handleModal()}>
+                <h3>{item.name}</h3>
                 <div className='container-img-and-bickes'>
                     <img src={item.img} alt="marker" />
                     <div className='container-number-bikes'>
                         <div>
                             <Bike />
-                            <span>4</span>
+                            <span>{freeBikes}</span>
                         </div>
                         <div>
                             <Bike />
-                            <span>2</span>
+                            <span>{usedBikes}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            {open ? <Electrodialog open={open} handleOpen={handleOpen} item={item} /> : null}
+            {open ? <ElectroDialog open={open} handleModal={handleModal} item={item} slots={slots} /> : null}
         </Marker>
     )
 
