@@ -7,8 +7,6 @@ import SlotsItem from "./Slots";
 
 export default function ElectroDialog({ open, handleModal, item, slots }) {
 
-    console.log(item);
-
     return (
         <Dialog
             open={open}
