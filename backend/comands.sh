@@ -6,6 +6,8 @@ if [ $# -eq 0 ]; then
     \033[32m2) 📦 Crear Migraciones\033[0m
     \033[32m3) 🔧 Crear Migracion de Modelo\033[0m
     \033[32m4) 🚀 Aplicar Migraciones\033[0m
+    \033[32m5) 🗑 Borrar Migraciones\033[0m
+    \033[32m6) 👮 Crear Superusuario\033[0m
     "
     read -p "Elige una opción: " opcion
 
@@ -22,6 +24,12 @@ if [ $# -eq 0 ]; then
     ;;
     '4')
         python3 manage.py migrate
+    ;;
+    '5')
+        find . -name migrations -type d -exec rm -rf {} +
+        ;;
+    '6')
+        python3 manage.py createsuperuser
     ;;
     *)
         echo "Opción inválida."
@@ -41,10 +49,15 @@ case $1 in
     'am')
         python3 manage.py migrate
         ;;
+    'bm')
+        find . -name migrations -type d -exec rm -rf {} +
+        ;;
+    'cs')
+        python3 manage.py createsuperuser
+        ;;
     *)
-        echo "No funciona, debes introducir [borrar_cache,crear_migrations,crear_migrations2 + parametro,aplicar_migrations]"
+        echo "No funciona, debes introducir [borrar_cache,crear_migrations,crear_migrations2 + parametro,aplicar_migrations,borrar_migrations,crear_superusuario]"
         ;;
 esac
 
 fi
-
