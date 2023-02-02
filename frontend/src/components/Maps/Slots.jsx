@@ -14,19 +14,24 @@ export default function SlotsItem({ slots }) {
                 })
             }
         </div>
-
     )
 }
 
 function BikeSlot({ slot }) {
+
+    const handleClick = () => {
+        console.log(slot)
+    }
+
     return (
         <div
-            style={{ fill: slot.used ? "grey" : "green" }}
+            style={{ fill: slot.bike_id ? "green" : "grey" }}
             className='slot'
+            onClick={slot.bike_id ? handleClick : null}
         >
             <Paper>
                 <div className='slot'>
-                    <FrontBike used={slot.used} />
+                    <FrontBike used={slot.bike_id} />
                     <span>{slot.id}</span>
                 </div>
             </Paper>
