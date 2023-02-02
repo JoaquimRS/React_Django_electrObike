@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from .models import Slot
 from electrobike.apps.bikes.serializers import BikeDictionary
+from django.db.models import Max
 
 class SlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = Slot
         fields = ('station','bike')
+    def getLastNumber(station_id):
+        return Slot.objects.filter(station_id=station_id).aggregate(Max('number'))['number__max']
     def getSlots():
         queryset = Slot.objects.all()
         serialized_stations = [SlotDictionary.to_slots(station) for station in queryset]
@@ -14,21 +17,25 @@ class SlotSerializer(serializers.ModelSerializer):
         serializer = SlotSerializer(
             data=newSlot
         )
-        if serializer.is_valid(raise_exception=True):
-            return "A"
-
-        return "A"
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return newSlot
+    def deleteSlot(idSlot):
+        slot = Slot.objects.get(id_slot=idSlot)
+        return slot.delete()
 
 class SlotDictionary(serializers.ModelSerializer):
     def to_slots(instance):
-        return {
+        data = {
             'id_slot': instance.id_slot,
-            'slug': instance.slug,
+            'number': instance.number,
             'station_id': instance.station_id,
             'bike_id': instance.bike_id,
-            'bike': BikeDictionary.to_bike(instance.bike),
             'station': SlotDictionary.to_station(instance.station)
         }
+        if instance.bike_id is not None:
+            data['bike'] = BikeDictionary.to_bike(instance.bike)
+        return data
     def to_station(instance):
         return {
             'id_station': instance.id_station,
