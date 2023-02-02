@@ -33,12 +33,7 @@ export default function ElectroDialog({ open, handleModal, item, slots }) {
                     overflow: 'auto',
                 }}>
                     <div className="slots-main">
-                        <h3>Slots</h3>
-                        <div className="slots-container">
-                            {slots.map((slot, index) => (
-                                <SlotsItem slot={slot} key={index} />
-                            ))}
-                        </div>
+                        <SlotsItem slots={slots} />
                     </div>
                 </Box>
 

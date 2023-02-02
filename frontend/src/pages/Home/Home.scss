@@ -163,9 +163,14 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                box-sizing: border-box;
+                flex-direction: column;
+                font-weight: 600;
+                gap: 5px;
+                margin: 2px;
 
                 svg {
-                    width: 75px;
+                    width: 100%;
                 }
             }
         }
