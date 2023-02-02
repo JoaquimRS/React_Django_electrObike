@@ -6,7 +6,7 @@ class Slot(models.Model):
     class Meta:
         db_table = 'slots'
     id_slot = models.CharField(max_length=25, primary_key=True)
-    slug = models.CharField(max_length=100, unique=True)
+    number = models.IntegerField(default=0, unique=True)
     station = models.ForeignKey(Station, on_delete=models.CASCADE)
     bike = models.OneToOneField(Bike, on_delete=models.DO_NOTHING, blank=True, null=True)
     def __str__(self):

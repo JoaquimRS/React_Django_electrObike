@@ -5,6 +5,7 @@ class Station(models.Model):
         db_table = 'stations'
     id_station = models.CharField(max_length=25,primary_key=True)
     slug = models.CharField(max_length=100)
+    number = models.IntegerField(default=0,unique=True)
     name = models.CharField(max_length=100)
     lat = models.DecimalField(max_digits=8, decimal_places=6)
     long = models.DecimalField(max_digits=9, decimal_places=6)

@@ -6,8 +6,8 @@ from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsA
 
 class Slot(viewsets.GenericViewSet):
     def getSlots(self,request):
-        serializer = SlotSerializer.getSlots()
-        return Response(serializer,status=status.HTTP_200_OK)
+        return Response(SlotSerializer.getSlots(),status=status.HTTP_200_OK)
     def addSlot(self,request):
-        response = SlotSerializer.addSlot(request.data)
-        return Response(data=response,status=status.HTTP_201_CREATED)
+        return Response(SlotSerializer.addSlot(request.data),status=status.HTTP_201_CREATED)
+    def deleteSlot(self,request,idSlot):
+        return Response(SlotSerializer.deleteSlot(idSlot), status=status.HTTP_200_OK)
