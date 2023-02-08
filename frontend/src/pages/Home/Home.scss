@@ -158,26 +158,47 @@
 
         .slots-container {
 
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            height: 35vh;
+            display: flex;
+            flex-direction: row;
+            // flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
 
-
-
-            .slot {
-
+            .inside-slots-container {
+                height: 200px;
+                max-width: 82vw;
                 display: flex;
-                justify-content: center;
-                align-items: center;
-                box-sizing: border-box;
-                flex-direction: column;
-                font-weight: 600;
-                gap: 5px;
-                margin: 2px;
+                flex-wrap: nowrap;
+                width: auto;
 
-                svg {
-                    width: 100%;
+                img {
+                    height: 100%;
                 }
+
+                .slot {
+                    position: relative;
+                    max-width: 104px;
+
+                    span {
+                        position: absolute;
+                        bottom: 0;
+                        color: white;
+                        z-index: 2;
+                        left: 38%;
+                        font-weight: 900;
+                        font-size: 0.95rem;
+                    }
+                }
+
+                .last-slot {
+                    transform: rotateY(180deg) translateX(1px);
+                }
+
             }
+
+
+
         }
 
         h3 {
@@ -186,6 +207,8 @@
             font-size: 1.2rem;
             text-align: center;
         }
+
+
     }
 
     .dialog-footer {
@@ -194,4 +217,29 @@
         padding: 10px;
     }
 
+}
+
+.confirm-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    p {
+        margin: 0;
+        padding: 20px 0;
+        box-sizing: border-box;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px;
+    }
 }

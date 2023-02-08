@@ -6,7 +6,6 @@ import { useState } from 'react';
 const Maps = ({ stations }) => {
 
     const YOUR_ACCESS_TOKEN = "pk.eyJ1Ijoiam9hbmdnNCIsImEiOiJjbGRhaXZxNjMwaXBzM3Bzend2MTBhdWxsIn0.ZZL5dl-OU8fFrTQfXuqXAw"
-
     const [zoomState, setZoomState] = useState(true)
 
     const handleZoom = (e) => {

@@ -1,13 +1,12 @@
 import './App.css';
 import React, { lazy, Suspense } from 'react';
 import {
-  BrowserRouter,
-  Routes,
-  Route
+    BrowserRouter,
+    Routes,
+    Route,
 } from 'react-router-dom';
 import { Navbar } from './components';
-import Home from './pages/Home/Home';
-import { Profile, Notification } from './pages';
+import { Profile, Notification, Home, ErrorNF } from './pages';
 
 function App() {
   return (
@@ -15,9 +14,10 @@ function App() {
       <Suspense >
         <BrowserRouter>
           <Routes>
-            <Route path={'/home'} element={<Home />} />
+            <Route path={'/home'}  element={<Home />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/notification' element={<Notification />} />
+            <Route path={'*'} element={<ErrorNF/>}/>
           </Routes>
           <Navbar />
         </BrowserRouter>
