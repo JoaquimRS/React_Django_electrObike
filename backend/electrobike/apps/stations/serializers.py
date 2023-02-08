@@ -3,6 +3,7 @@ from .models import Station
 from django.utils.text import slugify
 from electrobike.apps.bikes.serializers import BikeDictionary
 from django.db.models import Max
+from rest_framework import exceptions
 
 class StationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,25 +16,34 @@ class StationSerializer(serializers.ModelSerializer):
         serialized_stations = [StationDictionary.to_stations(station) for station in queryset]
         return serialized_stations
     def addStation(newStation):
-        serializer = StationSerializer(
-            data=newStation
-        )
+        serializer = StationSerializer(data=newStation)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return newStation
+        return {'msg':"Station creada correctamente",'station':StationDictionary.to_stations(serializer.save())}
+        
     def deleteStation(idStation):
-        station = Station.objects.get(id_station=idStation)
-        return station.delete()
+        try:
+            station = Station.objects.get(id_station=idStation)
+            station.delete()
+            return {'msg':"Station borrada correctamente"}
+        except Station.DoesNotExist:
+            msg = 'Station no existe.'
+            raise exceptions.NotFound(msg)
     def updateStation(idStation, modStation):
-        response =  Station.objects.filter(id_station=idStation).update(
-            slug = slugify(modStation['name']),
-            name = modStation['name'],
-            lat = modStation['lat'],
-            long = modStation['long'],
-            img = modStation['img']
-        )
-        return response
-
+        try:
+            # Check if idStation exists
+            Station.objects.get(id_station=idStation)
+            # Validate station
+            StationSerializer(data=modStation).is_valid(raise_exception=True)
+            # Create Slug from Name
+            modStation['slug'] = slugify(modStation['name'])
+            # Update the station
+            Station.objects.filter(id_station=idStation).update(**modStation)
+            # Find the final Station and return
+            station = Station.objects.get(id_station=idStation)
+            return {'msg':"Station modificada correctamente",'station':StationDictionary.to_stations(station)}
+        except Station.DoesNotExist:
+            msg = 'Station no existe.'
+            raise exceptions.NotFound(msg)
 class StationDictionary(serializers.ModelSerializer):
     def to_slots(instance):
         data = {

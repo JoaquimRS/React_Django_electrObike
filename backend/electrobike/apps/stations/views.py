@@ -2,9 +2,13 @@ from rest_framework import viewsets,status
 from rest_framework.response import Response
 from .serializers import StationSerializer
 from .models import Station
-from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser,)
+from electrobike.apps.core.permissions import IsAuthUser
 
 class Station(viewsets.GenericViewSet):
+    def get_permissions(self):
+        if self.request.method in ('POST','PUT','DELETE'):
+            self.permission_classes = [IsAuthUser]
+        return super(Station, self).get_permissions()
     def getStations(self,request):
         return Response(StationSerializer.getStations(),status=status.HTTP_200_OK)
     def addStation(self, request):
