@@ -17,3 +17,13 @@ class IsAuthUser(permissions.BasePermission):
             return True if User.objects.get(email=request.user.email) else False
         except Exception as e:
             return False
+
+class IsAdmin(permissions.BasePermission):
+    message = 'You are not an admin'
+    def has_permission(self, request, view):
+        return True if request.user.role == "ADMIN" else False
+
+class IsManager(permissions.BasePermission):
+    message = 'You are not a manager or an admin'
+    def has_permission(self, request, view):
+        return True if request.user.role in ("ADMIN","MANAGER") else False

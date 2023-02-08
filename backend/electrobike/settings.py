@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'electrobike.apps.clients',
     'electrobike.apps.rents',
     'electrobike.apps.users',
-    'electrobike.apps.incidents'
+    'electrobike.apps.incidents',
+    'electrobike.apps.notifications'
 ]
 
 MIDDLEWARE = [

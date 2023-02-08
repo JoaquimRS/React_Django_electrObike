@@ -20,7 +20,7 @@ class Client(models.Model):
         return self.generate_token_jwt()
     
     def generate_token_jwt(self):
-        dt = datetime.now() +timedelta(minutes=1)
+        dt = datetime.now() +timedelta(minutes=60)
         token = jwt.encode({
             'email': self.email,
             'exp': int(dt.strftime('%s'))

@@ -2,12 +2,12 @@ from rest_framework import viewsets,status
 from rest_framework.response import Response
 from .serializers import SlotSerializer
 from .models import Slot
-from electrobike.apps.core.permissions import IsAuthUser
+from electrobike.apps.core.permissions import (IsAuthUser,IsManager)
 
 class Slot(viewsets.GenericViewSet):
     def get_permissions(self):
         if self.request.method in ('POST','DELETE'):
-            self.permission_classes = [IsAuthUser]
+            self.permission_classes = [IsAuthUser, IsManager]
         return super(Slot,self).get_permissions()
     def getSlots(self,request):
         return Response(SlotSerializer.getSlots(),status=status.HTTP_200_OK)
