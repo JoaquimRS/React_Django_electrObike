@@ -12,8 +12,7 @@ class SlotSerializer(serializers.ModelSerializer):
         return Slot.objects.filter(station_id=station_id).aggregate(Max('number'))['number__max']
     def getSlots():
         queryset = Slot.objects.all()
-        serialized_stations = [SlotDictionary.to_slots(station) for station in queryset]
-        return serialized_stations
+        return [SlotDictionary.to_slots(station) for station in queryset]
     def addSlot(newSlot):
         serializer = SlotSerializer(
             data=newSlot

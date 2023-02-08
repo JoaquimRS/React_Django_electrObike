@@ -13,8 +13,7 @@ class StationSerializer(serializers.ModelSerializer):
         return Station.objects.aggregate(Max('number'))['number__max']
     def getStations():
         queryset = Station.objects.all()
-        serialized_stations = [StationDictionary.to_stations(station) for station in queryset]
-        return serialized_stations
+        return [StationDictionary.to_stations(station) for station in queryset]
     def addStation(newStation):
         serializer = StationSerializer(data=newStation)
         serializer.is_valid(raise_exception=True)

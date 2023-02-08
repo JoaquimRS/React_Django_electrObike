@@ -12,8 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('name','email','password','role')
     def getUsers():
         queryset = User.objects.all()
-        serialized_users = [UserDictionary.to_user(user) for user in queryset]
-        return serialized_users
+        return [UserDictionary.to_user(user) for user in queryset]
     def addUser(newUser):
         newUser['password'] = argon2.PasswordHasher().hash(newUser['password'])
         serializer = UserSerializer(
