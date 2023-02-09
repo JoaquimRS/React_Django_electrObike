@@ -1,7 +1,5 @@
 import { Dialog, Paper, Box, Button } from '@mui/material';
 import { useState } from "react";
-import Lottie from 'react-lottie';
-import Bike from '/src/assets/bikes/84149-bike.json'
 
 export default function SlotsItem({ slots }) {
     const orderSlots = [...slots].sort((a, b) => a.number - b.number)
@@ -70,17 +68,9 @@ const ConfirmDialog = ({ confirmDialog, handleClose, bike }) => {
         >
             <Box className='confirm-dialog'>
                 <p>¿Quieres reservar la bici <strong>{bike.bike_plate}</strong>?</p>
-                <Lottie options={{
-                    loop: true,
-                    autoplay: true,
-                    animationData: Bike,
-                    rendererSettings: {
-                        preserveAspectRatio: 'xMidYMid slice'
-                    },
-                }}
-                    height={200}
-                    width={200}
-                />
+                <div style={{ width: 200, height: 200 }}>
+                    <img src="../../src/assets/bikes/84149-bike.gif" alt="" width={'100%'} />
+                </div>
                 <div className='button-container'>
                     <Button variant="outlined" color="primary" onClick={() => handleReserve()}>Reservar</Button>
                     <Button variant="outlined" color="error" onClick={() => handleClose()}>Cancelar</Button>

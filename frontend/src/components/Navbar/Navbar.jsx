@@ -7,6 +7,8 @@ const Navbar = () => {
 
     const location = useLocation()
 
+    const activeProfile = ['/profile', '/login', '/register']
+
     return (
         < div className="navbar-container" >
             <nav>
@@ -16,7 +18,7 @@ const Navbar = () => {
                 <Link to="/home" className={location.pathname === '/home' ? 'active' : null}>
                     <MapIcon />
                 </Link>
-                <Link to="/profile" className={location.pathname === '/profile' ? 'active' : null}>
+                <Link to="/profile" className={activeProfile.includes(location.pathname) ? 'active' : null}>
                     <User />
                 </Link>
             </nav>
