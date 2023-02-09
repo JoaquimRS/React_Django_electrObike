@@ -1,5 +1,5 @@
 from django.urls import path
-from .view import Slot
+from .views import Slot
 
 urlpatterns = [
     path('slots', Slot.as_view({'get':'getSlots'})),

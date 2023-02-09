@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'electrobike.apps.clients',
     'electrobike.apps.rents',
     'electrobike.apps.users',
-    'electrobike.apps.incidents'
+    'electrobike.apps.incidents',
+    'electrobike.apps.notifications'
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+]
+ARGON2_TIME_COST = 4
+ARGON2_MEMORY_COST = 65536
+ARGON2_PARALLELISM = 2
+ARGON2_HASH_LENGTH = 32
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -160,3 +170,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'electrobike.apps.auth.backends.JWTAuthentication',
+    )
+}
