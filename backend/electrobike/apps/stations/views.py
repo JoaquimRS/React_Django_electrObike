@@ -1,7 +1,6 @@
 from rest_framework import viewsets,status
 from rest_framework.response import Response
 from .serializers import StationSerializer
-from .models import Station
 from electrobike.apps.core.permissions import (IsAuthUser,IsManager)
 
 class Station(viewsets.GenericViewSet):
