@@ -5,28 +5,33 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import AuthGuard from './services/guards/AuthGuard';
+
+import { AuthContextProvider } from "./context/AuthContext";
+
 import { Navbar } from './components';
 import { Profile, Notification, Home, ErrorNF, Login } from './pages';
-import AuthGuard from './services/guards/AuthGuard';
 
 function App() {
   return (
     <div>
       <Suspense >
         <BrowserRouter>
-          <Routes>
-            <Route path={'/home'} element={<Home />} />
+          <AuthContextProvider>
+            <Routes>
+              <Route path={'/home'} element={<Home />} />
 
-            <Route path='/login' element={<Login />} />
+              <Route path='/login' element={<Login />} />
 
-            <Route element={<AuthGuard />}>
-              <Route path='/profile' element={<Profile />} />
-            </Route>
+              <Route element={<AuthGuard />}>
+                <Route path='/profile' element={<Profile />} />
+              </Route>
 
 
-            <Route path='/notification' element={<Notification />} />
-            <Route path={'*'} element={<ErrorNF />} />
-          </Routes>
+              <Route path='/notification' element={<Notification />} />
+              <Route path={'*'} element={<ErrorNF />} />
+            </Routes>
+          </AuthContextProvider>
           <Navbar />
         </BrowserRouter>
       </Suspense>

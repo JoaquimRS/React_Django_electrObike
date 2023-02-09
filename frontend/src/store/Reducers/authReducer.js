@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import JWTService from '../../services/JWTService'
+import authService from '../../services/authService'
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -13,5 +15,8 @@ export const authSlice = createSlice({
 })
 
 export const { setUser } = authSlice.actions
+
+
+
 
 export default authSlice.reducer
