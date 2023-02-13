@@ -1,13 +1,17 @@
 import { useCallback } from "react"
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import AuthService from "../services/AuthService"
+import JWTService from "../services/JWTService"
 
 export default function useAuth() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const login = useCallback((user) => {
         AuthService.login(user).then(res => {
+            JWTService.setToken({ token: res.body.token, refresh_token: res.body.refresh_token })
             dispatch({
                 type: 'SET_TOASTR', payload: {
                     type: 'success',
@@ -15,8 +19,15 @@ export default function useAuth() {
                     show: true
                 }
             });
-            console.log(res)
+            dispatch({
+                type: 'SET_USER', payload: {
+                    user: res.body.client
+                }
+            });
+
+            navigate("/home")
         }).catch(err => {
+            console.log(err.response.body.detail);
             dispatch({
                 type: 'SET_TOASTR', payload: {
                     type: 'error',

@@ -1,12 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
-import JWTService from '../../services/JWTService'
-import authService from '../../services/authService'
-
-
 const INITIAL_STATE = {
     user: null
 };
-
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {

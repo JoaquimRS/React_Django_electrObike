@@ -1,17 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit'
+const INITIAL_STATE = {
+    stations: []
+};
 
-export const stationsSlice = createSlice({
-    name: 'stations',
-    initialState: {
-        stations: []
-    },
-    reducers: {
-        setStationsStore: (state, action) => {
-            state.stations = action.payload
-        }
-    },
-})
+export default (state = INITIAL_STATE, { type, payload }) => {
+    switch (type) {
+        case 'SET_STATIONS':
+            return {
+                ...state,
+                stations: payload
+            }
+        default:
+            return state
+    }
+}
+// import { createSlice } from '@reduxjs/toolkit'
 
-export const { setStationsStore } = stationsSlice.actions
+// export const stationsSlice = createSlice({
+//     name: 'stations',
+//     initialState: {
+//         stations: []
+//     },
+//     reducers: {
+//         setStationsStore: (state, action) => {
+//             state.stations = action.payload
+//         }
+//     },
+// })
 
-export default stationsSlice.reducer
+// export const { setStationsStore } = stationsSlice.actions
+
+// export default stationsSlice.reducer
