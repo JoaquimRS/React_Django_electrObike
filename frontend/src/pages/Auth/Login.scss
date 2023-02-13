@@ -1,0 +1,45 @@
+.main-login {
+    height: 89vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/auth/login.png');
+    background-size: cover;
+}
+
+.container-login {
+    height: 80%;
+    display: grid;
+    place-items: center;
+    width: 100%;
+
+    h1 {
+        position: absolute;
+        top: 5%;
+        left: 10%;
+        width: 35%;
+        color: #19B5F2;
+    }
+
+
+    form {
+        margin-top: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        button[type="submit"] {
+            width: 60%;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            padding: 10px;
+            background-color: #19B5F2;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,5 +1,7 @@
 import { Dialog, Paper, Box, Button } from '@mui/material';
 import { useState } from "react";
+import { Navigate, redirect, useLocation, useNavigate } from 'react-router-dom';
+import JWTService from '../../services/JWTService';
 
 export default function SlotsItem({ slots }) {
     const orderSlots = [...slots].sort((a, b) => a.number - b.number)
@@ -56,9 +58,16 @@ function BikeSlot({ slot }) {
 
 const ConfirmDialog = ({ confirmDialog, handleClose, bike }) => {
 
+    const navigate = useNavigate()
+
     const handleReserve = () => {
+
+        if (!JWTService.getToken()) return navigate("/login")
+
         // TODO - Reservar bici
-        console.log('Reservando')
+
+
+        // console.log('Reservando')
     }
 
     return (
