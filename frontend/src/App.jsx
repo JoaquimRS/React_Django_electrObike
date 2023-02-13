@@ -11,6 +11,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 
 import { Navbar } from './components';
 import { Profile, Notification, Home, ErrorNF, Login } from './pages';
+import Toastr from './components/Toastr/Toastr';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             </Routes>
           </AuthContextProvider>
           <Navbar />
+          <Toastr />
         </BrowserRouter>
       </Suspense>
     </div>

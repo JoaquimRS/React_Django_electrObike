@@ -8,12 +8,20 @@ const superagent = superagentPromise(_superagent, global.Promise);
 // const API_ROOT = "http://localhost:8000/api";
 const API_ROOT = "http://192.168.137.1:8000/api"
 
-const responseBody = res => res;
+const responseBody = res => {
+    return res
+};
 
 const responseToken = req => {
     if (localStorage.token) {
         req.set('Authorization', `Bearer ${localStorage.token}`);
     }
+}
+
+const errorBody = err => {
+    // console.log(err.response.body.detail);
+    return err
+    err.response.body.detail ? err.response.body.detail : null
 }
 
 const response = {

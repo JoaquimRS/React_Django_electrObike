@@ -41,5 +41,12 @@
             font-weight: 600;
             cursor: pointer;
         }
+
+        .text-danger {
+            color: red;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            margin-top: -10px;
+        }
     }
 }

@@ -5,29 +5,16 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockIcon from '@mui/icons-material/Lock';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useForm } from 'react-hook-form';
+import useAuth from '../../hooks/useAuth';
+
 const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const infoForm = useReducer((state, action) => {
-        switch (action.type) {
-            case 'email':
-                return { ...state, email: action.value }
-            case 'password':
-                return { ...state, password: action.value }
-            default:
-                return state
-        }
-    }, {
-        email: '',
-        password: ''
-    })
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const hundleSubmit = (e) => {
-        e.preventDefault();
-
-        console.log(infoForm[0]);
-    }
+    const { login } = useAuth();
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -60,7 +47,7 @@ const Login = () => {
     }
 
     const imputStyle = {
-        marginBottom: '30px',
+        marginBottom: '25px',
         border: 'none',
         '& .MuiInputBase-root': {
             borderRadius: '30px',
@@ -77,15 +64,29 @@ const Login = () => {
         <div className='main-login'>
             <div className="container-login" >
                 <h1>INICIAR SESIÓN</h1>
-                <form onSubmit={hundleSubmit}>
+                <form onSubmit={handleSubmit(login)}>
                     <TextField type="text" name="email" placeholder="Email"
                         sx={{ ...imputStyle, width: '100%' }}
+                        {...register("email", {
+                            required: true,
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            }
+                        })}
                         InputProps={inputProps(MailOutlineIcon)}
-                        onChange={(e) => infoForm[1]({ type: 'email', value: e.target.value })} />
+                    />
+                    {errors.email && errors.email.type === "pattern" && <span className="text-danger">Email no valido</span>}
+                    {errors.email?.type === 'required' && <span className="text-danger">No has introducido email</span>}
                     <TextField type={showPassword ? "text" : "password"} name="password" placeholder="Password"
                         sx={imputStyle}
+                        {...register("password", {
+                            required: true,
+                            minLength: 8
+                        })}
                         InputProps={{ ...inputProps(LockIcon,), ...passwdProps() }}
-                        onChange={(e) => infoForm[1]({ type: 'password', value: e.target.value })} />
+                    />
+                    {errors.password && errors.password.type === "minLength" && <span className="text-danger">Un minimo de 8 caracteres</span>}
+                    {errors.password?.type === 'required' && <span className="text-danger">No has introducido contraseña</span>}
                     <button type="submit">Login</button>
                 </form>
 
