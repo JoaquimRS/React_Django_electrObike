@@ -8,4 +8,4 @@ class Bike(models.Model):
     bike_plate = models.IntegerField(unique=True)
 
     def __str__(self):
-        return self.id_bike
+        return str(self.bike_plate)

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Slot
 from electrobike.apps.bikes.serializers import BikeDictionary
 from django.db.models import Max
+from rest_framework import exceptions
 
 class SlotSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,18 +12,21 @@ class SlotSerializer(serializers.ModelSerializer):
         return Slot.objects.filter(station_id=station_id).aggregate(Max('number'))['number__max']
     def getSlots():
         queryset = Slot.objects.all()
-        serialized_stations = [SlotDictionary.to_slots(station) for station in queryset]
-        return serialized_stations
+        return [SlotDictionary.to_slots(station) for station in queryset]
     def addSlot(newSlot):
         serializer = SlotSerializer(
             data=newSlot
         )
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return newSlot
+        return {'msg':"Slot creada correctamente",'slot':SlotDictionary.to_slots(serializer.save())}
     def deleteSlot(idSlot):
-        slot = Slot.objects.get(id_slot=idSlot)
-        return slot.delete()
+        try: 
+            slot = Slot.objects.get(id_slot=idSlot)
+            slot.delete()
+            return {'msg':"Slot borrado correctamente"}
+        except Slot.DoesNotExist:
+            msg = 'Slot no existe.'
+            raise exceptions.NotFound(msg)
 
 class SlotDictionary(serializers.ModelSerializer):
     def to_slots(instance):

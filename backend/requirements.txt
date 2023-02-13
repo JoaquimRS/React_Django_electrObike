@@ -7,3 +7,5 @@ djangorestframework
 django-cors-headers
 PyJWT==1.7.1
 djangorestframework-jwt==1.11.0
+argon2-cffi
+pyjwt

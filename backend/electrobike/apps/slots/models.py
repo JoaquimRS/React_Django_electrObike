@@ -10,4 +10,4 @@ class Slot(models.Model):
     station = models.ForeignKey(Station, on_delete=models.CASCADE)
     bike = models.OneToOneField(Bike, on_delete=models.DO_NOTHING, blank=True, null=True)
     def __str__(self):
-        return self.id_slot
+        return str(self.number)
