@@ -1,11 +1,9 @@
 import response from './Api'
 
-
-
 export default {
-    getUser: new Promise((resolve, reject) => {
-        resolve({ data: 'joan' })
-    }),
+    getProfile() {
+        return response.get('/profile')
+    },
     login(user) {
         return response.post('/auth/login', user)
     }

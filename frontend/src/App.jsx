@@ -25,7 +25,9 @@ function App() {
               <Route path='/login' element={<Login />} />
 
               <Route element={<AuthGuard />}>
-                <Route path='/profile' element={<Profile />} />
+                <Route path='/profile' element={<Profile />} >
+                  <Route path='hola' element={<Profile />} />
+                </Route>
               </Route>
 
 

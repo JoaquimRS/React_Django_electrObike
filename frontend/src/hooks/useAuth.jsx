@@ -20,9 +20,7 @@ export default function useAuth() {
                 }
             });
             dispatch({
-                type: 'SET_USER', payload: {
-                    user: res.body.client
-                }
+                type: 'SET_USER', payload: res.body.client
             });
 
             navigate("/home")
@@ -39,5 +37,15 @@ export default function useAuth() {
         })
     }, [])
 
-    return { login }
+    const logout = useCallback(() => {
+        JWTService.removeToken()
+        dispatch({
+            type: 'SET_USER', payload: {
+                user: null
+            }
+        });
+        navigate("/home")
+    }, [])
+
+    return { login, logout }
 }

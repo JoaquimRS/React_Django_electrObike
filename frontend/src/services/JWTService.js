@@ -8,6 +8,7 @@ const JWTService = {
     },
     removeToken: () => {
         window.localStorage.removeItem('token')
+        window.localStorage.removeItem('refreshToken')
     }
 }
 
