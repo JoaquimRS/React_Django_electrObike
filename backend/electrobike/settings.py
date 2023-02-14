@@ -78,17 +78,11 @@ MIDDLEWARE = [
     
 ]
 
-<<<<<<< HEAD
 CORS_ALLOW_HEADERS = [
     "authorization-client",
     "authorization-admin"
 
 ]
-=======
-# CORS_ALLOW_HEADERS = [
-#     "ximo"
-# ]
->>>>>>> c5e74d1625b9be0743b250c935b56ac1bd41d935
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000','http://0.0.0.0:3000', "http://127.0.0.1:3000", "http://192.168.137.1:3000",
