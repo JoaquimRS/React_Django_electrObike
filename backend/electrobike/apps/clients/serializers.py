@@ -32,11 +32,24 @@ class ClientSerializer(serializers.ModelSerializer):
             raise exceptions.NotFound(msg)
     
 class ClientDictionary(serializers.ModelSerializer):
+    def to_rent(instance):
+        return {
+            'id_rent': instance.id_rent,
+            'client_id': instance.client_id,
+            'bike_id': instance.bike_id,
+            'status': instance.status,
+            'get_slot_id': instance.get_slot_id,
+            'leave_slot_id': instance.leave_slot_id,
+            'get_at': instance.get_at,
+            'leave_at': instance.leave_at,
+            'kms': instance.kms,
+        }
     def to_client(instance):
         return {
             'id_client': instance.id_client,
             'name': instance.name,
             'email': instance.email,
             'phone': instance.phone,
-            'avatar': instance.avatar
+            'avatar': instance.avatar,
+            'rents': [ClientDictionary.to_rent(rent) for rent in instance.rent_set.all()]
         }

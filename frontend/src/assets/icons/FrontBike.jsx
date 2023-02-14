@@ -5,7 +5,7 @@ export default function FrontalBike({ used }) {
     return (
         <svg viewBox="-20 0 120 120" version="1.1">
             <g id="bike-rack-parallel-right" transform="matrix(0.635,0,0,0.635,-5.72,-261)">
-                {used ? null : <Bici />}
+                <Bici />
                 <Palo />
             </g>
         </svg>
