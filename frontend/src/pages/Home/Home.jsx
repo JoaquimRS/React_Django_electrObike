@@ -5,12 +5,12 @@ import useStations from "../../hooks/useStations";
 
 const Home = () => {
 
-    const { stations } = useStations()
+    useStations();
 
     return (
         <div className="map-container">
             {/* <ActMontior /> */}
-            <Maps stations={stations} />
+            <Maps />
         </div>
     );
 }

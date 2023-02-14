@@ -3,23 +3,40 @@ import React, { lazy, Suspense } from 'react';
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
 } from 'react-router-dom';
+import AuthGuard from './services/guards/AuthGuard';
+
+import { AuthContextProvider } from "./context/AuthContext";
+
 import { Navbar } from './components';
-import Home from './pages/Home/Home';
-import { Profile, Notification } from './pages';
+import { Profile, Notification, Home, ErrorNF, Login } from './pages';
+import Toastr from './components/Toastr/Toastr';
 
 function App() {
   return (
     <div>
       <Suspense >
         <BrowserRouter>
-          <Routes>
-            <Route path={'/home'} element={<Home />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/notification' element={<Notification />} />
-          </Routes>
+          <AuthContextProvider>
+            <Routes>
+              <Route path={'/home'} element={<Home />} />
+
+              <Route path='/login' element={<Login />} />
+
+              <Route element={<AuthGuard />}>
+                <Route path='/profile' element={<Profile />} >
+                  <Route path='hola' element={<Profile />} />
+                </Route>
+              </Route>
+
+
+              <Route path='/notification' element={<Notification />} />
+              <Route path={'*'} element={<ErrorNF />} />
+            </Routes>
+          </AuthContextProvider>
           <Navbar />
+          <Toastr />
         </BrowserRouter>
       </Suspense>
     </div>

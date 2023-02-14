@@ -14,7 +14,7 @@ export default function ElectroDialog({ open, handleModal, item, slots }) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <div className='container-dialog'>
+            <div className='container-dialog' >
                 <div className="button-more">
                     <IconButton size="large">
                         <MoreHorizIcon fontSize="inherit" />
@@ -31,10 +31,11 @@ export default function ElectroDialog({ open, handleModal, item, slots }) {
                 <Box sx={{
                     maxHeight: '380px',
                     overflow: 'auto',
-                }}>
-                    <div className="slots-main">
+                }}
+                >
+                    {slots.length !== 0 ? (<div className="slots-main">
                         <SlotsItem slots={slots} />
-                    </div>
+                    </div>) : <div>No hay slots disponibles disculpe la molestias</div>}
                 </Box>
 
 
