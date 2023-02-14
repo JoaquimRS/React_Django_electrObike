@@ -1,9 +1,20 @@
+import { useSelector } from "react-redux"
+import "./Profile.scss";
+import { FormControl, TextField } from "@mui/material";
 
 export default function User() {
+    const user = useSelector(state => state.auth.user)
+
+    console.log(user);
 
     return (
-        <div>
+        <div className="container-info-user">
+
             <h1>User</h1>
+            <TextField label='Nombre' defaultValue={user.name} disabled />
+            <TextField label='Email' defaultValue={user.email} disabled />
+            <TextField label='Telefono' defaultValue={user.phone} disabled />
+
         </div>
     )
 }

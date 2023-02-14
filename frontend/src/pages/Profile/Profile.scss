@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     background-image: url('../../assets/auth/profile7.png');
-    min-height: 89vh;
+    height: 89vh;
     background-size: cover;
 
     .img-container {
@@ -54,5 +54,19 @@
         font-size: 1.5rem;
         padding: 5px;
     }
+
+}
+
+.container-info-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 25px 0;
+    padding-bottom: 10px;
+    font-size: 1.5rem;
+    padding: 5px;
+    gap: 25px;
+
 
 }

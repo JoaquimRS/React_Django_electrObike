@@ -10,6 +10,7 @@ export default function useAuth() {
     const navigate = useNavigate()
 
     const login = useCallback((user) => {
+        console.log(user);
         AuthService.login(user).then(res => {
             JWTService.setToken({ token: res.body.token, refresh_token: res.body.refresh_token })
             dispatch({

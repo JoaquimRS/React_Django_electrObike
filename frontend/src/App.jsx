@@ -24,12 +24,7 @@ function App() {
               <Route path='/login' element={<Login />} />
 
               <Route element={<AuthGuard />}>
-                <Route path='/profile'  >
-                  <Route index element={<Profile />} />
-                  <Route path='user' element={<User />} />
-                  <Route path='reservations' element={<Reserves />} />
-                  <Route path='incidents' element={<Incidents />} />
-                </Route>
+                <Route path='/profile' element={<Profile />} />
               </Route>
 
 

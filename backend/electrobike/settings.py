@@ -78,11 +78,10 @@ MIDDLEWARE = [
     
 ]
 
-CORS_ALLOW_HEADERS = [
-    "authorization-client",
-    "authorization-admin"
-
-]
+# CORS_ALLOW_HEADERS = [
+#     "authorization-client",
+#     "authorization-admin"
+# ]
 # CORS_ALLOW_HEADERS = [
 #     "ximo"
 # ]
