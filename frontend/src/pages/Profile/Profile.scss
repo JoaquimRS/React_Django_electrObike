@@ -45,12 +45,14 @@
 
     .section-profile {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
         margin: 25px 0;
-        padding-bottom: 10px;
+        // padding-bottom: 10px;
         border-bottom: 1px solid rgb(188, 188, 188);
-        width: 100%;
-
+        width: 90%;
+        font-size: 1.5rem;
+        padding: 5px;
     }
 
 }

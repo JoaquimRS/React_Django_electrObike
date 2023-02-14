@@ -3,12 +3,14 @@
 export default function Loading() {
 
     return (
-        <div class="spinner">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+        <div className="spinner-container">
+            <div className="spinner">
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+            </div>
         </div>
     )
 }

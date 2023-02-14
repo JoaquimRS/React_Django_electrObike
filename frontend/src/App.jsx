@@ -6,14 +6,13 @@ import {
   Route,
 } from 'react-router-dom';
 import AuthGuard from './services/guards/AuthGuard';
-
 import { AuthContextProvider } from "./context/AuthContext";
-
 import { Navbar } from './components';
-import { Profile, Notification, Home, ErrorNF, Login } from './pages';
+import { Profile, Notification, Home, ErrorNF, Login, Incidents, Reserves, User } from './pages';
 import Toastr from './components/Toastr/Toastr';
 
 function App() {
+
   return (
     <div>
       <Suspense >
@@ -25,8 +24,11 @@ function App() {
               <Route path='/login' element={<Login />} />
 
               <Route element={<AuthGuard />}>
-                <Route path='/profile' element={<Profile />} >
-                  <Route path='hola' element={<Profile />} />
+                <Route path='/profile'  >
+                  <Route index element={<Profile />} />
+                  <Route path='user' element={<User />} />
+                  <Route path='reservations' element={<Reserves />} />
+                  <Route path='incidents' element={<Incidents />} />
                 </Route>
               </Route>
 
