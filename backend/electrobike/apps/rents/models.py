@@ -12,7 +12,7 @@ class Rent(models.Model):
     status = models.CharField(max_length=100)
     get_slot = models.ForeignKey(Slot, on_delete=models.DO_NOTHING, related_name='get_slot')
     leave_slot = models.ForeignKey(Slot, on_delete=models.DO_NOTHING, related_name='leave_slot', blank=True, null=True)
-    get_at = models.DateTimeField()
+    get_at = models.DateTimeField(blank=True, null=True)
     leave_at = models.DateTimeField(blank=True, null=True)
     kms = models.FloatField(blank=True, null=True)
     

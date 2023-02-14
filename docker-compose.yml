@@ -38,6 +38,7 @@ services:
       - db
     volumes:
       - ./backend/electrobike:/opt/app/electrobike
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - rdp
 

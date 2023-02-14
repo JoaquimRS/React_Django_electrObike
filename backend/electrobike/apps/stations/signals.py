@@ -13,4 +13,4 @@ def generate_id_and_slug(sender, instance, *args, **kwargs):
     if instance and not instance.slug:
         instance.slug = slugify(instance.name)
     if instance and not instance.number:
-        instance.number = StationSerializer.getLastNumber()+100
+        instance.number = StationSerializer.getLastNumber()+100 if StationSerializer.getLastNumber() else 100

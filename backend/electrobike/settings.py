@@ -1,6 +1,7 @@
 import environ
 from pathlib import Path
 import os
+import pytz
 
 env = environ.Env(
     POSTGRES_USER=str,
@@ -12,6 +13,8 @@ env = environ.Env(
 )
 
 environ.Env.read_env(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..') + '/.env')
+
+TIME_ZONE = 'Europe/Madrid'
 
 """
 Django settings for electrobike project.
@@ -73,6 +76,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     
+]
+
+CORS_ALLOW_HEADERS = [
+    "authorization-client",
+    "authorization-admin"
+
 ]
 
 CORS_ORIGIN_WHITELIST = (
