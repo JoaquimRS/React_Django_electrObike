@@ -13,10 +13,8 @@ export function AuthContextProvider({ children }) {
     useEffect(() => {
         const token = JWTService.getToken()
         if (token) {
-            // AuthService.getUser().then(res => {
-            AuthService.getUser.then(res => {
-                console.log(res.data)
-                dispatch({ type: "SET_USER", payload: res.data })
+            AuthService.getProfile().then(res => {
+                dispatch({ type: "SET_USER", payload: res.body })
             })
         }
     }, [])

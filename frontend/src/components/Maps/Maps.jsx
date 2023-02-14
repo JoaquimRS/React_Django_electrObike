@@ -1,12 +1,14 @@
 import ReactMapGL from 'react-map-gl';
 import CustomMarker from './Marker';
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const Maps = ({ stations }) => {
+const Maps = () => {
 
     const YOUR_ACCESS_TOKEN = "pk.eyJ1Ijoiam9hbmdnNCIsImEiOiJjbGRhaXZxNjMwaXBzM3Bzend2MTBhdWxsIn0.ZZL5dl-OU8fFrTQfXuqXAw"
     const [zoomState, setZoomState] = useState(true)
+    const stations = useSelector(state => state.stations.stations)
 
     const handleZoom = (e) => {
         if (e.viewState.zoom < 13) {

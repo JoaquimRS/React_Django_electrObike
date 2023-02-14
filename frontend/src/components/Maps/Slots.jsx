@@ -6,8 +6,6 @@ import JWTService from '../../services/JWTService';
 export default function SlotsItem({ slots }) {
     const orderSlots = [...slots].sort((a, b) => a.number - b.number)
 
-    console.log(orderSlots)
-
     return (
         <div className="slots-container" >
             <div className='inside-slots-container'>
