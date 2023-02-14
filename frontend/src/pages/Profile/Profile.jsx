@@ -14,7 +14,7 @@ const Profile = () => {
         logout()
     }
 
-    return (
+    return user ? (
         <div>
             <div className="profile-container">
                 <div className="img-container">
@@ -26,7 +26,7 @@ const Profile = () => {
                 <button onClick={handleLogout}>Logout</button>
             </div>
         </div>
-    )
+    ) : <div>Loading...</div>
 }
 
 export default Profile

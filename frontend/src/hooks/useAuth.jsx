@@ -40,9 +40,7 @@ export default function useAuth() {
     const logout = useCallback(() => {
         JWTService.removeToken()
         dispatch({
-            type: 'SET_USER', payload: {
-                user: null
-            }
+            type: 'SET_USER', payload: null
         });
         navigate("/home")
     }, [])
