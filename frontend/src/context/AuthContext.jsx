@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 import JWTService from '../services/JWTService'
-import AuthService from "../services/AuthService"
+import AuthService from "../services/authService"
 import { useDispatch } from "react-redux"
 
 export const AuthContext = React.createContext()

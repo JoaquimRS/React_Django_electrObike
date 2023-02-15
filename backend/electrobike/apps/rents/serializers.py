@@ -23,11 +23,11 @@ class RentSerializer(serializers.ModelSerializer):
                 raise exceptions.NotFound('Esa bici no se encuentra en ningun Slot')
             
             # Check if the client has any bike active
-            if Rent.objects.exclude(client_id=client.id_client, status='4'):
+            if Rent.objects.exclude(status='4').filter(client_id=client.id_client):
                 raise NotAllowedToRent("Ya estas rentando una bici")
             
             # Check if the bike is been used
-            if Rent.objects.exclude(bike_id=bike.id_bike, status='4'):
+            if Rent.objects.exclude(status='4').filter(bike_id=bike.id_bike):
                 raise NotAllowedToRent("Esta bici esta reservada por otro cliente")
 
             newRent = {
@@ -52,7 +52,7 @@ class RentSerializer(serializers.ModelSerializer):
                 raise exceptions.NotFound('Esa bici no se encuentra en ningun Slot')
             
             # Check if the client has any bike active
-            if Rent.objects.exclude(Q(client_id=client.id_client) & (Q(status='4') | Q(status='1'))):
+            if Rent.objects.exclude((Q(status='4') | Q(status='1'))).filter(client_id=client.id_client):
                 raise NotAllowedToRent("Ya has reservado una bici")
             
             # Check if bike and client exists and have the status 1
@@ -83,8 +83,8 @@ class RentSerializer(serializers.ModelSerializer):
                 raise NotAllowedToRent("El Slot esta ocupado")
             
             # Check if Client has any bike active
-            if Rent.objects.exclude(Q(client_id=client.id_client) & (Q(status='4') | Q(status='2'))):
-                raise NotAllowedToRent("Ya has reservado una bici")
+            if Rent.objects.exclude((Q(status='4') | Q(status='2'))).filter(client_id=client.id_client):
+                raise NotAllowedToRent("No estas usando una bici")
 
             # Check if Client has been using any bike
             rent = Rent.objects.filter(client_id=client.id_client, status=2).first()
@@ -108,13 +108,13 @@ class RentSerializer(serializers.ModelSerializer):
             # Check if bikeSlug is the same as UserBike
 
             # Check if Client has any bike active
-            if Rent.objects.exclude(Q(client_id=client.id_client) & (Q(status='4') | Q(status='3'))):
-                    raise NotAllowedToRent("Ya has reservado una bici")
+            if Rent.objects.exclude((Q(status='4') | Q(status='3'))).filter(client_id=client.id_client):
+                    raise NotAllowedToRent("No has reservado un slot")
 
             # Check if Client has been using a Bike and Reserved Slot
             rent = Rent.objects.filter(client_id=client.id_client, status=3, bike_id=bike.id_bike).first()
             if not rent:
-                raise NotAllowedToRent("No has introducido un slot")
+                raise NotAllowedToRent("Esta no es tu Bici")
             
             # Modify Rent
             rent.leave_at = datetime.now()

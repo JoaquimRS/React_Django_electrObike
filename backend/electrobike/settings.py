@@ -78,18 +78,18 @@ MIDDLEWARE = [
     
 ]
 
-CORS_ALLOW_HEADERS = [
-    "authorization-client",
-    "authorization-admin"
+# CORS_ALLOW_HEADERS = [
+#     "authorization-client",
+#     "authorization-admin"
 
-]
+# ]
 # CORS_ALLOW_HEADERS = [
 #     "ximo"
 # ]
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000','http://0.0.0.0:3000', "http://127.0.0.1:3000", "http://192.168.137.1:3000",
-    'http://192.168.27.45:3000', 'http://172.31.112.1:3000'
+    'http://192.168.27.45:3000', 'http://172.31.112.1:3000', 'http://172.20.10.2:3000', 'http://192.168.1.34:3000'
 )
 
 ROOT_URLCONF = 'electrobike.urls'
@@ -164,7 +164,7 @@ ARGON2_HASH_LENGTH = 32
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'GMT'
 
 USE_I18N = True
 
