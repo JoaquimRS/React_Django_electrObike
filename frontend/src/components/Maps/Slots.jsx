@@ -2,6 +2,9 @@ import { Dialog, Paper, Box, Button } from '@mui/material';
 import { useState } from "react";
 import { Navigate, redirect, useLocation, useNavigate } from 'react-router-dom';
 import JWTService from '../../services/JWTService';
+import { rentsService } from '../../services';
+import { useDispatch } from 'react-redux';
+import AuthService from '../../services/authService';
 
 export default function SlotsItem({ slots }) {
     const orderSlots = [...slots].sort((a, b) => a.number - b.number)
@@ -56,16 +59,34 @@ function BikeSlot({ slot }) {
 
 const ConfirmDialog = ({ confirmDialog, handleClose, bike }) => {
 
+    const dispatch = useDispatch()
+
     const navigate = useNavigate()
 
     const handleReserve = () => {
 
         if (!JWTService.getToken()) return navigate("/login")
 
-        // TODO - Reservar bici
-
-
-        // console.log('Reservando')
+        rentsService.reserveBike(bike.id_bike).then(res => {
+            dispatch({
+                type: 'SET_TOASTR', payload: {
+                    type: 'success',
+                    message: "Has reservado la Bici " + bike.bike_plate,
+                    show: true
+                }
+            })
+            AuthService.getProfile().then(res => {
+                dispatch({ type: "SET_USER", payload: res.body })
+            })
+        }).catch(err => {
+            dispatch({
+                type: 'SET_TOASTR', payload: {
+                    type: 'error',
+                    message: err.response.body.detail,
+                    show: true
+                }
+            })
+        })
     }
 
     return (

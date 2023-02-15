@@ -65,7 +65,7 @@ const Login = () => {
             <div className="container-login" >
                 <h1>INICIAR SESIÓN</h1>
                 <form onSubmit={handleSubmit(login)}>
-                    <TextField type="text" name="email" placeholder="Email"
+                    <TextField type="email" name="email" placeholder="Email"
                         sx={{ ...imputStyle, width: '100%' }}
                         {...register("email", {
                             required: true,
