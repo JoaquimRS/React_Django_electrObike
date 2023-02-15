@@ -9,4 +9,4 @@ def generate_id_and_slug(sender, instance, *args, **kwargs):
     if instance and not instance.id_bike:
         instance.id_bike = generate_random_string(size=25)
     if instance and not instance.slug:
-        instance.slug = slugify(str(instance.bike_plate)) + "|" + generate_random_string(size=10)
+        instance.slug = slugify(str(instance.bike_plate)) + "_" + generate_random_string(size=10)

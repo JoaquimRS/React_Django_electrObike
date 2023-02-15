@@ -1,5 +1,7 @@
 import stationsService from "./stationsService"
+import rentsService from "./rentsService"
 
 export {
-    stationsService
+    stationsService,
+    rentsService
 }

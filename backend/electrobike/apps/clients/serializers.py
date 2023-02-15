@@ -37,6 +37,7 @@ class ClientDictionary(serializers.ModelSerializer):
             'id_rent': instance.id_rent,
             'client_id': instance.client_id,
             'bike_id': instance.bike_id,
+            'bike_plate': instance.bike.bike_plate,
             'status': instance.status,
             'get_slot_id': instance.get_slot_id,
             'leave_slot_id': instance.leave_slot_id,
@@ -51,5 +52,7 @@ class ClientDictionary(serializers.ModelSerializer):
             'email': instance.email,
             'phone': instance.phone,
             'avatar': instance.avatar,
-            'rents': [ClientDictionary.to_rent(rent) for rent in instance.rent_set.all()]
+            'rents': [ClientDictionary.to_rent(rent) for rent in instance.rent_set.all()],
+            'has_rent': any(rent.status != "4" for rent in instance.rent_set.all())
+            
         }

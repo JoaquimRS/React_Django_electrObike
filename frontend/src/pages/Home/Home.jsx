@@ -1,18 +1,26 @@
 import "./Home.scss"
 import { Maps, ActMontior } from "../../components";
 import useStations from "../../hooks/useStations";
-// import { webView } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-
     useStations();
+    
+    const authClient = useSelector(state => state.auth.user);
+    const [client, setClient] = useState(null);
+
+    useEffect(() => {
+        setClient(authClient);    
+    }, [authClient]);
 
     return (
         <div className="map-container">
-            {/* <ActMontior /> */}
+            {client && client.has_rent ? <ActMontior rent={client.rents.filter(rent => rent.status != "4")[0]}/> : null}
             <Maps />
         </div>
     );
 }
-// 38.825155,-0.6019766
-export default Home
+
+export default Home;
