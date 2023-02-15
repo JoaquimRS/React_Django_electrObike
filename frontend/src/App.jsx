@@ -10,7 +10,7 @@ import AuthGuard from './services/guards/AuthGuard';
 import { AuthContextProvider } from "./context/AuthContext";
 
 import { Navbar } from './components';
-import { Profile, Notification, Home, ErrorNF, Login } from './pages';
+import { Profile, Notification, Home, NFC, ErrorNF, Login } from './pages';
 import Toastr from './components/Toastr/Toastr';
 
 function App() {
@@ -20,7 +20,13 @@ function App() {
         <BrowserRouter>
           <AuthContextProvider>
             <Routes>
-              <Route path={'/home'} element={<Home />} />
+              <Route path={'/home'}>
+                <Route index element={<Home/>}/>
+                <Route element={<AuthGuard />}>
+                  <Route path={':slugBike'} element={<NFC/>}/>
+                </Route>
+              </Route>
+
 
               <Route path='/login' element={<Login />} />
 
