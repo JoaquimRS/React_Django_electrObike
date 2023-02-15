@@ -65,6 +65,14 @@ nav>a {
     transition: transform 0.1s;
 }
 
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 87vh;
+    width: 100%;
+}
+
 .spinner {
     width: 60px;
     height: 60px;
