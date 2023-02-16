@@ -21,9 +21,9 @@ function App() {
           <AuthContextProvider>
             <Routes>
               <Route path={'/home'}>
-                <Route index element={<Home/>}/>
+                <Route index element={<Home />} />
                 <Route element={<AuthGuard />}>
-                  <Route path={':slugBike'} element={<NFC/>}/>
+                  <Route path={':slugBike'} element={<NFC />} />
                 </Route>
               </Route>
 

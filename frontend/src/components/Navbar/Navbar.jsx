@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const location = useLocation()
 
-    const activeProfile = ['/profile', '/login', '/register']
+    const activeProfile = ['/profile', '/login', '/register', '/profile/user', '/profile/reservations', '/profile/incidents']
 
     return (
         < div className="navbar-container" >
