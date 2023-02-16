@@ -8,7 +8,7 @@ import Reserves from "./Reserves";
 import Incidents from "./Incidents";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button } from "@mui/material";
-
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const Profile = () => {
     const [page, setPage] = useState('/')
 
@@ -92,7 +92,7 @@ const PageSection = ({ title, path, setPage }) => {
     return (
         <div className="section-profile" onClick={hundleClick}>
             <div>{title}</div>
-            <div>{'-->'}</div>
+            <div><ArrowForwardIcon/></div>
         </div>
     )
 }
