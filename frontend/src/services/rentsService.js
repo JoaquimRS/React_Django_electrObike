@@ -7,11 +7,11 @@ export default {
     rentBike(slugBike) {
         return response.get(`/rents/rent/bike/${slugBike}`)
     },
-    leaveSlot() {
-        return response.get()
+    leaveSlot(idSlot) {
+        return response.get(`/rents/leave/slot/${idSlot}`)
     },
-    leaveBike() {
-        return response.get()
+    leaveBike(slugBike) {
+        return response.get(`/rents/leave/bike/${slugBike}`)
     }
 
 
