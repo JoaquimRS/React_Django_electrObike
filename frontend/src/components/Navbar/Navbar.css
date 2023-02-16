@@ -63,7 +63,43 @@ nav>a {
     height: 70px;
     width: 70px;
     transition: transform 0.1s;
+    position: relative;
 }
+.ring {
+    animation: ring .2s 5 ease-in-out;
+}
+
+nav>a>.n-notification {
+    all: unset;
+    color: white;
+    background-color: red;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    padding: 0px 5px 0px 5px;
+    font-weight: 900;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    33% {
+      transform: rotate(15deg);
+    }
+    66% {
+        transform: rotate(-15deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
 
 .spinner-container {
     display: flex;

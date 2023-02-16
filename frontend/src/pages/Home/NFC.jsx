@@ -19,33 +19,60 @@ const NFC = () => {
 
     useEffect(() => {
         if (client) {
-            rentsService.rentBike(slugBike).then(res => {
-                dispatch({
-                    type: 'SET_TOASTR', payload: {
-                        type: 'success',
-                        message: "Has rentado la Bici " +slugBike.split("_")[0],
-                        show: true
-                    }
+            if (client.rents.filter(rent => rent.status == 1).length) {
+                rentsService.rentBike(slugBike).then(res => {
+                    dispatch({
+                        type: 'SET_TOASTR', payload: {
+                            type: 'success',
+                            message: "Has rentado la Bici " + slugBike.split("_")[0],
+                            show: true
+                        }
+                    })
+                    AuthService.getProfile().then(res => {
+                        dispatch({ type: "SET_USER", payload: res.body })
+                    })
+                    navigate("/home")
+                }).catch(err => {
+                    dispatch({
+                        type: 'SET_TOASTR', payload: {
+                            type: 'error',
+                            message: err.response.body.detail,
+                            show: true
+                        }
+                    })
+                    navigate("/home")
                 })
-                AuthService.getProfile().then(res => {
-                    dispatch({ type: "SET_USER", payload: res.body })
+            } else if (client.rents.filter(rent => rent.status == 3).length) {
+                rentsService.leaveBike(slugBike).then(res => {
+                    dispatch({
+                        type: 'SET_TOASTR', payload: {
+                            type: 'success',
+                            message: "Has dejado la Bici " +slugBike.split("_")[0],
+                            show: true
+                        }
+                    })
+                    AuthService.getProfile().then(res => {
+                        dispatch({ type: "SET_USER", payload: res.body })
+                    })
+                    navigate("/home")
+                }).catch(err => {
+                    dispatch({
+                        type: 'SET_TOASTR', payload: {
+                            type: 'error',
+                            message: err.response.body.detail,
+                            show: true
+                        }
+                    })
+                    navigate("/home")
                 })
-                navigate("/home")
-            }).catch(err => {
-                dispatch({
-                    type: 'SET_TOASTR', payload: {
-                        type: 'error',
-                        message: err.response.body.detail,
-                        show: true
-                    }
-                })
-            })
+            }
+
         }
     }, [client])
 
     return (
         <div>
-            <img className="bike-loader" src="/src/assets/bikes/bike-loader.gif"/>
+            <img className="bike-loader" src="/src/assets/bikes/bike-loader.gif" />
         </div>
     )
 }

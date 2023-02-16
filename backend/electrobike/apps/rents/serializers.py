@@ -4,9 +4,10 @@ from rest_framework import exceptions
 from electrobike.apps.slots.models import Slot
 from electrobike.apps.bikes.models import Bike
 from electrobike.apps.bikes.serializers import BikeDictionary
+from electrobike.apps.notifications.models import Notification
 from electrobike.apps.core.exceptions import NotAllowedToRent
 from django.db.models import Q
-from datetime import datetime
+from datetime import datetime, timedelta
 from electrobike.apps.core.utils import get_distance_between
 
 class RentSerializer(serializers.ModelSerializer):
@@ -37,8 +38,15 @@ class RentSerializer(serializers.ModelSerializer):
                 'get_slot_id': bike.slot.id_slot
             }
 
-            # TODO Generar una notificación de reserva, si el usuario no confirma la reserva en 5 minutos la bici dejara de estar reservada.
-                        
+            # Send Notification
+            reserve_notification = {
+                'client_id': client.id_client,
+                'expiration': datetime.now() + timedelta(minutes=5),
+                'img': "/reserve_bike.png",
+                'title': "Alquiler de Bicicleta",
+                'description': "Acabas de reservar una bicicleta, si no la coges en 5 minutos dejara de estar reservada."
+            }
+            Notification.objects.create(**reserve_notification)
             return RentDictionary.to_rent(Rent.objects.create(**newRent))
         except Bike.DoesNotExist:
             raise exceptions.NotFound('Bici no existe')
@@ -126,7 +134,15 @@ class RentSerializer(serializers.ModelSerializer):
             slot = Slot.objects.get(id_slot=rent.leave_slot_id)
             slot.bike_id = rent.bike_id
             slot.save()
-            
+            # Send Notification
+            leave_notification = {
+                'client_id': client.id_client,
+                'expiration': datetime.now() + timedelta(minutes=5),
+                'img': "/leave_bike.png",
+                'title': "Fin uso Bicicleta",
+                'description': "Gracias por usar nuestros servicios."
+            }
+            Notification.objects.create(**leave_notification)
             return RentDictionary.to_rent(rent)
         except Bike.DoesNotExist:
             raise exceptions.NotFound('Bike no existe')
