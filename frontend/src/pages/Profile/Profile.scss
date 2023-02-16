@@ -5,6 +5,23 @@
     background-image: url('../../assets/auth/profile7.png');
     height: 89vh;
     background-size: cover;
+    overflow: scroll;
+
+    .button-back-menu {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: rgb(179, 179, 179);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border-radius: 50%;
+        
+    }
 
     .img-container {
         // background-color: #19B5F2;
@@ -12,6 +29,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 200px;
 
         img {
             background-color: white;
@@ -68,5 +86,9 @@
     padding: 5px;
     gap: 25px;
 
+    h3 {
+        font-size: 2rem;
+        margin: 10px 0;
+    }
 
 }

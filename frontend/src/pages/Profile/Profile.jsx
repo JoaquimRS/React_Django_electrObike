@@ -6,6 +6,8 @@ import { useState } from "react";
 import User from "./User";
 import Reserves from "./Reserves";
 import Incidents from "./Incidents";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Button } from "@mui/material";
 
 const Profile = () => {
     const [page, setPage] = useState('/')
@@ -29,7 +31,9 @@ const Profile = () => {
                     <img src={user.avatar} alt="" />
                 </div>
                 {
-                    page !== '/' && <button onClick={handleMenu}>Menu</button>
+                    page !== '/' && <div className="button-back-menu" >
+                        <ArrowBackIcon onClick={handleMenu}   />
+                    </div>
                 }
                 <PageSelected page={page} setPage={setPage} />
                 {
