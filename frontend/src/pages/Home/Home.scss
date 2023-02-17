@@ -183,6 +183,7 @@
                 .slot {
                     position: relative;
                     max-width: 104px;
+                    border-radius: 30px;
 
                     span {
                         position: absolute;
@@ -190,9 +191,17 @@
                         color: white;
                         z-index: 2;
                         left: 38%;
-                        font-weight: 900;
+                        font-weight: 700;
                         font-size: 0.95rem;
                     }
+                }
+
+                .empty {
+                    background-color: #ccc;
+                }
+
+                .no-auth {
+                    background-color: red;
                 }
 
                 .last-slot {
@@ -245,6 +254,30 @@
         justify-content: space-between;
         width: 100%;
         gap: 10px;
+    }
+    .slot-free-container {
+        display: flex;
+        justify-content: center;
+        width: 200px;
+        height: 200px;
+        position: relative;
+        .slot-free {
+            max-height: 100%;
+            width: auto;
+        }
+        .last-slot {
+            transform: rotateY(180deg) translateX(1px);
+        }
+        span {
+            position: absolute;
+            bottom: 0;
+            color: white;
+            z-index: 2;
+            left: 45%;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
     }
 }
 

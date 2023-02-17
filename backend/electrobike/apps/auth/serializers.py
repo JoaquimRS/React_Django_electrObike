@@ -3,6 +3,9 @@ from electrobike.apps.clients.models import Client
 from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
+from electrobike.apps.notifications.models import Notification
+from django.db.models import Q
+from django.utils import timezone
 import argon2
 
 class LoginSerializer(serializers.ModelSerializer):
@@ -46,6 +49,15 @@ class AuthDictionary(serializers.ModelSerializer):
             'leave_at': instance.leave_at,
             'kms': instance.kms,
         }
+    def to_notification(instance):
+        return {
+            'id_notification': instance.id_notification,
+            'client_id': instance.client_id,
+            'expiration': instance.expiration,
+            'img': instance.img,
+            'title': instance.title,
+            'description': instance.description
+        }
     def to_client(instance,status):
         return Response({
             'client': {
@@ -55,8 +67,9 @@ class AuthDictionary(serializers.ModelSerializer):
                 'phone': instance.phone,
                 'avatar': instance.avatar,
                 'rents': [AuthDictionary.to_rent(rent) for rent in instance.rent_set.all()],
-                'has_rent': any(rent.status != "4" for rent in instance.rent_set.all())
+                'has_rent': any(rent.status != "4" for rent in instance.rent_set.all()),
+                'notifications': [AuthDictionary.to_notification(notification) for notification in Notification.objects.filter(Q(client_id=instance.id_client) | Q(client_id=None)).exclude(expiration__lte=timezone.now())]
             },
             'token': instance.token,
-            'refresh_token': instance.refresh_token
+            'refresh_token': instance.refresh_token,
         }, status=status)

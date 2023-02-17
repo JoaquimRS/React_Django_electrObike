@@ -1,5 +1,8 @@
 from rest_framework import serializers, exceptions
 from .models import Client
+from electrobike.apps.notifications.models import Notification
+from django.db.models import Q
+from django.utils import timezone
 import argon2
 
 class ClientSerializer(serializers.ModelSerializer):
@@ -31,7 +34,7 @@ class ClientSerializer(serializers.ModelSerializer):
             msg = 'Client no existe.'
             raise exceptions.NotFound(msg)
     
-class ClientDictionary(serializers.ModelSerializer):
+class ClientDictionary(serializers.ModelSerializer):        
     def to_rent(instance):
         return {
             'id_rent': instance.id_rent,
@@ -45,6 +48,15 @@ class ClientDictionary(serializers.ModelSerializer):
             'leave_at': instance.leave_at,
             'kms': instance.kms,
         }
+    def to_notification(instance):
+        return {
+            'id_notification': instance.id_notification,
+            'client_id': instance.client_id,
+            'expiration': instance.expiration,
+            'img': instance.img,
+            'title': instance.title,
+            'description': instance.description
+        }
     def to_client(instance):
         return {
             'id_client': instance.id_client,
@@ -53,6 +65,7 @@ class ClientDictionary(serializers.ModelSerializer):
             'phone': instance.phone,
             'avatar': instance.avatar,
             'rents': [ClientDictionary.to_rent(rent) for rent in instance.rent_set.all()],
-            'has_rent': any(rent.status != "4" for rent in instance.rent_set.all())
+            'has_rent': any(rent.status != "4" for rent in instance.rent_set.all()),
+            'notifications': [ClientDictionary.to_notification(notification) for notification in Notification.objects.filter(Q(client_id=instance.id_client) | Q(client_id=None)).exclude(expiration__lte=timezone.now()).order_by('-expiration')]
             
         }
