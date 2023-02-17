@@ -23,7 +23,7 @@ const responseToken = req => {
     }
 }
 
-const errorBody = err => {    
+const errorBody = err => {
     console.log(err.response.body.detail);
     if (err.status == 401 || err.status == 403) {
         JWTService.removeToken()

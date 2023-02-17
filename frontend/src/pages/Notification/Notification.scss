@@ -1,0 +1,89 @@
+.notifications {
+    background-color: #82b0dd;
+    height: 89vh;
+    padding: 0 10px 50px 10px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        .refresh-icon {
+            width: 40px;
+            height: 40px;
+            svg {
+                max-width: 100%;
+                max-height: 100%;
+                background-color: #646d7f;
+                fill: white;
+                border-radius: 50%;
+            }
+        }
+        .refresh-icon:hover {
+            animation: spin 1s linear 1;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    }
+    .items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.notification-item {
+    background-color: #646d7fb2;
+    border-radius: 25px;
+    width: 100%;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    box-sizing: border-box;
+    position: relative;
+    .image {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    .information {
+        width: 90%;
+        position: relative;
+        p {
+            margin: 0;
+            padding: 0;
+            font-weight: 500;
+            color: white;
+            font-size: 1rem;
+        }
+        .title {
+            font-weight: 900;
+            
+        }
+    }
+    .expiration {
+        font-size: 1rem;
+        font-weight: 500;
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: .8rem;
+    }
+}
