@@ -3,9 +3,11 @@
     flex-direction: column;
     align-items: center;
     background-image: url('../../assets/auth/profile7.png');
-    height: 89vh;
+    height: 80vh;
     background-size: cover;
     overflow: scroll;
+
+
 
     .button-back-menu {
         position: absolute;
@@ -20,7 +22,7 @@
         align-items: center;
         justify-content: center;
         // border-radius: 50%;
-        
+
     }
 
     .img-container {
@@ -85,9 +87,11 @@
     font-size: 1.5rem;
     padding: 5px;
     gap: 25px;
+    // overflow-y: scroll;
+    // box-sizing: border-box;
 
     h3 {
-        font-size: 2rem;
+        font-size: 2em;
         margin: 10px 0;
     }
 
