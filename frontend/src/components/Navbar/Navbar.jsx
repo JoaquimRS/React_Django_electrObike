@@ -27,7 +27,7 @@ const Navbar = () => {
                         <>
                             <BellRing/>
                             <div className='n-notification'>
-                                <span>{client.notifications.length > 9 ? "+9" : client.notifications.length}</span>
+                                {/* <span>{client.notifications.length > 9 ? "+9" : client.notifications.length}</span> */}
                             </div>
                         </>
                         : <Bell/>

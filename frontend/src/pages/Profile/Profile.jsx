@@ -35,7 +35,7 @@ const Profile = () => {
                         <ArrowBackIcon onClick={handleMenu}   />
                     </div>
                 }
-                <PageSelected page={page} setPage={setPage} />
+                <PageSelected page={page} setPage={setPage}  />
                 {
                     page === '/' && <button onClick={handleLogout}>Logout</button>
                 }
@@ -63,7 +63,7 @@ const PageSelected = ({ page, setPage }) => {
     ]
     switch (page) {
         case '/user':
-            return <User />
+            return <User setPage={setPage}/>
         case '/reservations':
             return <Reserves />
         case '/incidents':

@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import "./Profile.scss";
-import { FormControl, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import AuthService from "../../services/authService";
 
-export default function User() {
+export default function User({ setPage }) {
     const user = useSelector(state => state.auth.user)
     const [edit, setEdit] = useState(true)
     const dispatch = useDispatch()
@@ -14,8 +16,32 @@ export default function User() {
 
     }
 
-    const handleSave = () => {
+    const { handleSubmit, register } = useForm()
+
+    const handleSave = (user) => {
+        AuthService.updateProfile(user).then(res => {
+            dispatch({
+                type: 'SET_TOASTR', payload: {
+                    type: 'success',
+                    message: res.body.msg,
+                    show: true
+                }
+            });
+            dispatch({
+                type: 'SET_USER', payload: res.body.client
+            });
+        }).catch(err => {
+            dispatch({
+                type: 'SET_TOASTR', payload: {
+                    type: 'error', message: err.response.body.detail, show: true
+                }
+            });
+        })
         setEdit(true)
+    }
+
+    const handleCancel = () => {
+        setPage('/')
     }
 
     const textFildStyle = {
@@ -26,17 +52,27 @@ export default function User() {
     return (
         <div className="container-info-user">
             <h3>Perfil</h3>
-            <TextField sx={textFildStyle} label='Nombre' defaultValue={user.name} disabled={edit} />
-            <TextField sx={textFildStyle} label='Email' defaultValue={user.email} disabled={edit} />
-            <TextField sx={textFildStyle} label='Telefono' defaultValue={user.phone} disabled={edit} />
-
+            <form onSubmit={handleSubmit(handleSave)}>
+                <TextField sx={textFildStyle} {...register('name', { required: true })} label='Nombre' defaultValue={user.name} disabled={edit} />
+                <TextField sx={textFildStyle}  label='Email' defaultValue={user.email} disabled={true} />
+                <TextField sx={textFildStyle} {...register('phone', { required: true })} label='Telefono' defaultValue={user.phone} disabled={edit} />
+                {
+                    !edit
+                        ? <div className="container-buttons-user">
+                            <button type="submit">Guardar</button>
+                            <button onClick={handleCancel}>Cancelar</button>
+                        </div>
+                        : null
+                }
+            </form>
             <div className="container-buttons-user">
                 {
                     edit
                         ? <button onClick={handleEdit}>Editar</button>
-                        : <button onClick={handleSave}>Guardar</button>
+                        : null
                 }
             </div>
+
         </div>
     )
 }
