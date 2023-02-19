@@ -9,5 +9,8 @@ export default {
     },
     login(user) {
         return response.post('/auth/login', user)
+    },
+    register(user) {
+        return response.post('/auth/register', user)
     }
 }

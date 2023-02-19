@@ -6,11 +6,11 @@ import {
   Route,
 } from 'react-router-dom';
 import AuthGuard from './services/guards/AuthGuard';
-
+import NoAuth from './services/guards/NoAuthGuard';
 import { AuthContextProvider } from "./context/AuthContext";
 
 import { Navbar } from './components';
-import { Profile, Notification, Home, NFC, ErrorNF, Login } from './pages';
+import { Profile, Notification, Home, NFC, ErrorNF, Login, Register } from './pages';
 import Toastr from './components/Toastr/Toastr';
 
 function App() {
@@ -27,8 +27,10 @@ function App() {
                 </Route>
               </Route>
 
-
-              <Route path='/login' element={<Login />} />
+              <Route element={<NoAuth />}>
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+              </Route>
 
               <Route element={<AuthGuard />}>
                 <Route path='/profile' element={<Profile />} >
