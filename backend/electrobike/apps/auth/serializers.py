@@ -39,11 +39,11 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class AuthDictionary(serializers.ModelSerializer):
     def to_station(instance):
-        return instance.name
-        
+        return instance.name 
     def to_slot(instance): 
-        return AuthDictionary.to_station(Station.objects.filter(id_station = instance.station_id).first())
-         
+        if instance == None:
+            return None
+        return ClientDictionary.to_station(Station.objects.filter(id_station = instance.station_id).first())
     def to_rent(instance):
         return {
             'id_rent': instance.id_rent,
