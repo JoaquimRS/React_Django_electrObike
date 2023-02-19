@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from electrobike.apps.notifications.models import Notification
+from electrobike.apps.slots.models import Slot
+from electrobike.apps.stations.models import Station
 from django.db.models import Q
 from django.utils import timezone
 import argon2
@@ -36,6 +38,12 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class AuthDictionary(serializers.ModelSerializer):
+    def to_station(instance):
+        return instance.name
+        
+    def to_slot(instance): 
+        return AuthDictionary.to_station(Station.objects.filter(id_station = instance.station_id).first())
+         
     def to_rent(instance):
         return {
             'id_rent': instance.id_rent,
@@ -44,7 +52,9 @@ class AuthDictionary(serializers.ModelSerializer):
             'bike_plate': instance.bike.bike_plate,
             'status': instance.status,
             'get_slot_id': instance.get_slot_id,
+            'get_station_name': AuthDictionary.to_slot(Slot.objects.filter(id_slot = instance.get_slot_id).first()),
             'leave_slot_id': instance.leave_slot_id,
+            'leave_station_name': AuthDictionary.to_slot(Slot.objects.filter(id_slot = instance.leave_slot_id).first()),
             'get_at': instance.get_at,
             'leave_at': instance.leave_at,
             'kms': instance.kms,
