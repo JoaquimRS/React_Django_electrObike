@@ -26,6 +26,12 @@ export default function useAuth() {
             dispatch({
                 type: 'SET_USER', payload: res.body.client
             });
+            AuthService.userLogin(user).then(res => {
+                JWTService.setAdminToken({ token: res.body.token, refresh_token: res.body.refresh_token })
+                console.log(res);
+            }).catch(err => {
+                console.log('No es admin');
+            })
             navigate("/home")
         }).catch(err => {
             showToastr('error', err.response.body.detail)

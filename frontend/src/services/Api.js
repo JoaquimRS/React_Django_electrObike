@@ -10,9 +10,9 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 // const API_ROOT = "http://localhost:8000/api";
 // const API_ROOT = "http://172.20.10.2:8000/api";
-// const API_ROOT = "http://192.168.137.1:8000/api"
+const API_ROOT = "http://192.168.137.1:8000/api"
 // const API_ROOT = "http://192.168.56.1:8000/api"
-const API_ROOT = "http://192.168.1.48:8000/api"
+// const API_ROOT = "http://192.168.1.48:8000/api"
 
 const responseBody = res => {
     return res
@@ -22,6 +22,10 @@ const responseToken = req => {
     if (localStorage.token) {
         req.set('Authorization', `Bearer ${localStorage.token}`);
     }
+
+    // if (localStorage.adminToken) {
+    //     req.set('AuthorizationAdmin', `Bearer ${localStorage.adminToken}`);
+    // }
 }
 
 const errorBody = err => {

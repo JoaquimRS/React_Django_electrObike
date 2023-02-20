@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     user: null,
     rents: [],
+    admin: false
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
@@ -15,6 +16,11 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 user: null,
                 rents: []
             }
+        case 'SET_ADMIN':
+            return payload ? {
+                ...state,
+                admin: payload
+            } : null
         default:
             return state
     }

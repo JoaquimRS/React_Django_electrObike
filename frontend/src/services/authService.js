@@ -12,5 +12,8 @@ export default {
     },
     register(user) {
         return response.post('/auth/register', user)
+    },
+    userLogin(user) {
+        return response.post('/users/login', user)
     }
 }
