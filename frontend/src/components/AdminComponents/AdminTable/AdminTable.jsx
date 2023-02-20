@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useCreateStations, useDeleteStations, useUpdateStations } from "../../../hooks/useAdminStations";
 import { useCreateSlots, useDeleteSlots, useUpdateSlots } from "../../../hooks/useAdminSlots";
+import { useCreateBikes, useDeleteBikes, useUpdateBikes } from "../../../hooks/useAdminBikes";
 
 export default function AdminTable({ columns, c_data, entity }) {
     const [data, setData] = useState(c_data)
@@ -38,8 +39,10 @@ export default function AdminTable({ columns, c_data, entity }) {
                 setData(newData)
                 toastr("success", response.msg);
             })
-            .catch((error) => {      
-                let msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]       
+            .catch((error) => { 
+                let msg
+                try {msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]} 
+                catch (error) {msg = "Ha ocurrido un error"}     
                 toastr("error", msg);
             });
         
@@ -78,7 +81,9 @@ export default function AdminTable({ columns, c_data, entity }) {
                     toastr("success", response.msg);
                 })
                 .catch((error) => {      
-                    let msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]       
+                    let msg
+                    try {msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]} 
+                    catch (error) {msg = "Ha ocurrido un error"}     
                     toastr("error", msg);
                 });
         }
@@ -122,8 +127,10 @@ export default function AdminTable({ columns, c_data, entity }) {
                     toastr('success', response.msg)
                 })
                 .catch((error) => {
-                    let msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]       
-                    toastr("error", msg);
+                    let msg
+                    try {msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]} 
+                    catch (error) {msg = "Ha ocurrido un error"}     
+                    toastr("error", msg);   
                 })
         }
     }

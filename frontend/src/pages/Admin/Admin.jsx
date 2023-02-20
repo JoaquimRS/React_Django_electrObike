@@ -13,7 +13,7 @@ import { Bikes, Incidents, Notifications, Rents, Slots, Stations, Clients, Users
 import { useState } from 'react';
 
 const Admin = () => {
-    const [main_component, set_main_component] = useState(<Slots />)
+    const [main_component, set_main_component] = useState(<Bikes />)
     const admin_pages = [
         { icon: <HomeIcon />, name: "Dashboard", component: <Dashboard /> },
         { icon: <Station />, name: "Stations", component: <Stations /> },
