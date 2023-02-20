@@ -1,0 +1,90 @@
+.admin-table {
+    max-height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+    border-radius: 15px;
+
+    table {
+        border-collapse: collapse;           
+        width: 100%;
+        th {
+            text-align: left;
+            color: white;
+            background-color: #36304a;
+        }
+        th, td {
+            box-sizing: border-box;
+            padding: 10px 10px 10px 10px !important;
+            max-width: 170px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        tr {
+            background-color: #bbbbbb;
+        }
+        
+        tr:nth-child(2n) {
+            background-color: #e6e6e6;
+        }
+        tr:hover {
+            cursor: pointer;
+            background-color: #dddddd;
+        }
+        thead {
+            position: sticky;
+            top: 0;
+            th {
+                text-transform: capitalize;
+            }
+        }
+        tbody{
+            padding: 30px;
+            overflow: auto;
+            .action-icons  {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                svg:hover {
+                    transform: scale(1.2);
+                }
+            }
+            .add-row {
+                text-align: center;
+                // svg {
+                //     width: 30px;
+                //     height: 30px;
+                // }
+            }
+            .add-row:hover svg {
+                transform: scale(1.2);
+            }
+            .new-row {
+                .action-icons {
+                    padding-top: 5px !important;
+                }
+                
+            }
+            input {
+                background-color: transparent;
+                border: none;
+                max-width: 100%;
+                height: 100%;
+                font-size: 1rem;
+                border-bottom: 1px solid black;
+            }
+            input:focus {
+                border: none;
+                outline: none;
+                border-bottom: 3px solid black;
+                
+            }
+        }
+        
+    }
+}
+::-webkit-scrollbar {
+    display: none;
+}
