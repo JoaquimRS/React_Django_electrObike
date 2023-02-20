@@ -9,6 +9,9 @@ export default {
     },
     deleteSlots(idSlot) {
         return response.del(`/slots/delete/${idSlot}`)
+    },
+    updateSlots(idSlot, modSlot) {
+        return response.put(`/slots/update/${idSlot}`, modSlot)
     }
 
 }

@@ -15,3 +15,5 @@ class Slot(viewsets.GenericViewSet):
         return Response(SlotSerializer.addSlot(request.data),status=status.HTTP_201_CREATED)
     def deleteSlot(self,request,idSlot):
         return Response(SlotSerializer.deleteSlot(idSlot), status=status.HTTP_200_OK)
+    def updateSlot(self, request, idSlot):
+        return Response(SlotSerializer.updateSlot(idSlot,request.data), status=status.HTTP_200_OK)

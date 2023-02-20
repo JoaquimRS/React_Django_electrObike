@@ -12,7 +12,7 @@ class StationSerializer(serializers.ModelSerializer):
     def getLastNumber():
         return Station.objects.aggregate(Max('number'))['number__max']
     def getStations():
-        queryset = Station.objects.all()
+        queryset = Station.objects.all().order_by('number')
         return [StationDictionary.to_stations(station) for station in queryset]
     def addStation(newStation):
         serializer = StationSerializer(data=newStation)

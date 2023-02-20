@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useCreateStations, useDeleteStations, useUpdateStations } from "../../../hooks/useAdminStations";
+import { useCreateSlots, useDeleteSlots, useUpdateSlots } from "../../../hooks/useAdminSlots";
 
 export default function AdminTable({ columns, c_data, entity }) {
     const [data, setData] = useState(c_data)
@@ -153,16 +154,27 @@ export default function AdminTable({ columns, c_data, entity }) {
                             {columns.map((column, columnIndex) => (
                                 <td key={columnIndex}>
                                     {row.editing ? (
-                                        column.edit ?
-                                            <input
-                                                type={column.type}
-                                                step={column.step}
-                                                placeholder={column.name.toUpperCase()}
-                                                defaultValue={row[column.name]}
-                                                onChange={(e) => changeModInput(column.name, e.target.value)}
-                                            />
-                                            : <p>{row[column.name]}</p>)
-                                        : <p>{row[column.name]}</p>}
+                                        column.edit ? 
+                                            ( column.type == "options" ?
+                                                <select onChange={(e) => changeModInput(column.name, e.target.value)} defaultValue={  row[column.name] ? row[column.name] : "none"}>
+                                                    <option value="none" className="disabled" disabled>Seleccionar Opción</option>
+                                                    {column.options.map(option => (
+                                                        <option key={option.val} value={option.val}>{option.name}</option>
+                                                    ))}
+                                                    <option value="">Sin Opción</option>
+                                                </select>
+                                                : <input
+                                                    type={column.type}
+                                                    step={column.step}
+                                                    placeholder={column.name.toUpperCase()}
+                                                    defaultValue={row[column.name]}
+                                                    onChange={(e) => changeModInput(column.name, e.target.value)}
+                                                />
+                                            )
+                                        : <p>{row[column.name]}</p>)
+                                    : <p>{ column.type == "options" && row[column.name] ? 
+                                            column.options[column.options.findIndex(o => o.val == row[column.name])].name 
+                                        : row[column.name]}</p>}
                                 </td>
                             ))}
                             <td className="action-icons">
@@ -181,14 +193,22 @@ export default function AdminTable({ columns, c_data, entity }) {
                         ? <tr className="new-row">
                             {columns.map((column, index) => (
                                 <td key={index}>
-                                    {column.edit ? (
-                                        <input
-                                            type={column.type}
-                                            step={column.step}
-                                            placeholder={column.name.toUpperCase()}
-                                            onChange={(e) => changeNewInput(column.name, e.target.value)}
-                                        />
-                                    ) : <p>-</p>}
+                                    { column.edit ?
+                                        ( column.type == "options" ? 
+                                            <select onChange={(e) => changeNewInput(column.name, e.target.value)} defaultValue="none">
+                                                <option value="none" className="disabled" disabled>Seleccionar Opción</option>
+                                                {column.options.map(option => (
+                                                    <option key={option.val} value={option.val}>{option.name}</option>
+                                                ))}
+                                            </select>
+                                            : <input
+                                                type={column.type}
+                                                step={column.step}
+                                                placeholder={column.name.toUpperCase()}
+                                                onChange={(e) => changeNewInput(column.name, e.target.value)}
+                                            />
+                                        )
+                                    : <p>-</p> }
                                 </td>
                             ))}
                             <td className="action-icons">

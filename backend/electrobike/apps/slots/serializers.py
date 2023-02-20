@@ -11,9 +11,13 @@ class SlotSerializer(serializers.ModelSerializer):
     def getLastNumber(station_id):
         return Slot.objects.filter(station_id=station_id).aggregate(Max('number'))['number__max']
     def getSlots():
-        queryset = Slot.objects.all()
+        queryset = Slot.objects.all().order_by('number')
         return [SlotDictionary.to_slots(station) for station in queryset]
-    def addSlot(newSlot):
+    def addSlot(reqSlot):
+        newSlot = {
+            'station': reqSlot['station_id'],
+        }
+        newSlot['bike'] = reqSlot['bike_id'] if 'bike_id' in reqSlot else None
         serializer = SlotSerializer(
             data=newSlot
         )
@@ -24,6 +28,28 @@ class SlotSerializer(serializers.ModelSerializer):
             slot = Slot.objects.get(id_slot=idSlot)
             slot.delete()
             return {'msg':"Slot borrado correctamente"}
+        except Slot.DoesNotExist:
+            msg = 'Slot no existe.'
+            raise exceptions.NotFound(msg)
+    def updateSlot(idSlot, reqSlot):
+        try:
+            # Check if idSlot exists
+            Slot.objects.get(id_slot=idSlot)
+            # Validate Slot
+            modSlot = {
+                'station': reqSlot['station_id'],
+            }
+            if 'bike_id' in reqSlot and reqSlot['bike_id']:
+                modSlot['bike'] = reqSlot['bike_id']
+            else:
+                modSlot['bike'] = None
+            SlotSerializer(data=modSlot).is_valid(raise_exception=True)
+            # Update Slot
+            Slot.objects.filter(id_slot=idSlot).update(**modSlot)
+            # Find the final Slot and return
+            slot = Slot.objects.get(id_slot=idSlot)
+            return {'msg':"Slot modificada correctamente", 'slot':SlotDictionary.to_slots(slot)}
+
         except Slot.DoesNotExist:
             msg = 'Slot no existe.'
             raise exceptions.NotFound(msg)
