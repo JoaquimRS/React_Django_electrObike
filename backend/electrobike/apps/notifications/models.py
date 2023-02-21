@@ -7,7 +7,7 @@ class Notification(models.Model):
     id_notification = models.CharField(max_length=25, primary_key=True)
     client = models.ForeignKey(Client, on_delete=models.DO_NOTHING, blank=True, null=True)
     expiration = models.DateTimeField()
-    img = models.TextField(blank=True, null=True, default="https://cdn-icons-png.flaticon.com/512/665/665049.png")
+    img = models.TextField(blank=True, null=True, default="/electrObike_icono.png")
     title = models.CharField(max_length=25)
     description = models.TextField()
 

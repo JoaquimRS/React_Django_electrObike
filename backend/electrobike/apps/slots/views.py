@@ -6,7 +6,7 @@ from electrobike.apps.core.permissions import (IsAuthUser,IsManager)
 
 class Slot(viewsets.GenericViewSet):
     def get_permissions(self):
-        if self.request.method in ('POST','DELETE'):
+        if self.request.method in ('POST','PUT','DELETE'):
             self.permission_classes = [IsAuthUser, IsManager]
         return super(Slot,self).get_permissions()
     def getSlots(self,request):

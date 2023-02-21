@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useCreateStations, useDeleteStations, useUpdateStations } from "../../../hooks/useAdminStations";
 import { useCreateSlots, useDeleteSlots, useUpdateSlots } from "../../../hooks/useAdminSlots";
 import { useCreateBikes, useDeleteBikes, useUpdateBikes } from "../../../hooks/useAdminBikes";
+import { useCreateNotifications, useDeleteNotifications } from "../../../hooks/useAdminNotifications";
 
 export default function AdminTable({ columns, c_data, entity }) {
     const [data, setData] = useState(c_data)

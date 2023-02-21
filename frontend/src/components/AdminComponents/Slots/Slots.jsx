@@ -8,7 +8,7 @@ export default function Slots() {
     const stations = useAdminStations()
     const bikes = useAdminBikes()
     let station_id_options = []
-    stations.map((station => {station_id_options.push({name:station.name,val:station.id_station})}))
+    stations.map((station) => {station_id_options.push({name:station.name,val:station.id_station})})
     let bike_id_options = []
     bikes.map((bike) => {bike_id_options.push({name:bike.bike_plate,val:bike.id_bike})})
 

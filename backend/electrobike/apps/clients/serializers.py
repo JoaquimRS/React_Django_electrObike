@@ -33,6 +33,9 @@ class ClientSerializer(serializers.ModelSerializer):
         except Client.DoesNotExist:
             msg = 'Client no existe.'
             raise exceptions.NotFound(msg)
+    def getClients():
+        queryset = Client.objects.all()
+        return [ClientDictionary.to_client(client) for client in queryset]
     
 class ClientDictionary(serializers.ModelSerializer):        
     def to_rent(instance):
@@ -43,9 +46,9 @@ class ClientDictionary(serializers.ModelSerializer):
             'bike_plate': instance.bike.bike_plate,
             'status': instance.status,
             'get_slot_id': instance.get_slot_id,
-            'get_station_name': instance.get_slot.station.name,
+            'get_station_name': instance.get_slot.station.name if instance.get_slot else None,
             'leave_slot_id': instance.leave_slot_id,
-            'leave_station_name': instance.leave_slot.station.name,
+            'leave_station_name': instance.leave_slot.station.name if instance.leave_slot else None,
             'get_at': instance.get_at,
             'leave_at': instance.leave_at,
             'kms': instance.kms,
