@@ -20,7 +20,7 @@ export default function Stations() {
                 <h1>Stations</h1>
             </div>
             <div className="container">
-                <AdminTable columns={columns} c_data={stations} entity="Stations" updateEntity={true}/>
+                <AdminTable columns={columns} c_data={stations} entity="Stations" />
             </div>
         </>
     )

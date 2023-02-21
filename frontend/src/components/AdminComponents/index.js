@@ -5,7 +5,7 @@ const Slots = lazy(() => import("./Slots/Slots"));
 const Bikes = lazy(() => import("./Bikes/Bikes"));
 const Notifications = lazy(() => import("./Notifications/Notifications"))
 const Incidents = lazy(() => import("./Incidents/Incidents"))
-const Rents = lazy(() => import("./Incidents/Incidents"))
+const Rents = lazy(() => import("./Rents/Rents"))
 const Clients = lazy(() => import("./Clients/Clients"))
 const Users = lazy(() => import("./Users/Users"))
 const AdminTable = lazy(() => import("./AdminTable/AdminTable"))

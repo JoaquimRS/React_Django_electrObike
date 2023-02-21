@@ -9,8 +9,9 @@ import { useCreateStations, useDeleteStations, useUpdateStations } from "../../.
 import { useCreateSlots, useDeleteSlots, useUpdateSlots } from "../../../hooks/useAdminSlots";
 import { useCreateBikes, useDeleteBikes, useUpdateBikes } from "../../../hooks/useAdminBikes";
 import { useCreateNotifications, useDeleteNotifications } from "../../../hooks/useAdminNotifications";
+import { useDeleteRents } from "../../../hooks/useAdminRents";
 
-export default function AdminTable({ columns, c_data, entity, updateEntity }) {
+export default function AdminTable({ columns, c_data, entity, updateEntity = true, deleteEntity = true, addEntity = true }) {
     const [data, setData] = useState(c_data)
     const [modValues, setModValues] = useState({})
     const [newRow, set_newRow] = useState(false)
@@ -223,11 +224,11 @@ export default function AdminTable({ columns, c_data, entity, updateEntity }) {
                                 <SaveIcon onClick={() => save_newRow()} />
                             </td>
                         </tr>
-                        : <tr>
+                        : ( addEntity ? <tr>
                             <td colSpan={columns.length + 1} className="add-row" onClick={() => add_newRow()}>
                                 <AddCircleIcon />
                             </td>
-                        </tr>
+                        </tr> : null)
                     }
 
                 </tbody>
