@@ -26,7 +26,7 @@ export default function Slots() {
                 <h1>Slots</h1>
             </div>
             <div className="container">
-                <AdminTable columns={columns} c_data={slots} entity="Slots" />
+                <AdminTable columns={columns} c_data={slots} entity="Slots" updateEntity={true}/>
             </div>
         </>
     )

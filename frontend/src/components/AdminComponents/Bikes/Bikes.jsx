@@ -15,7 +15,7 @@ export default function Bikes() {
                 <h1>Bikes</h1>
             </div>
             <div className="container">
-                <AdminTable columns={columns} c_data={bikes} entity="Bikes" />
+                <AdminTable columns={columns} c_data={bikes} entity="Bikes" updateEntity={true} />
             </div>
         </>
     )

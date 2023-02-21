@@ -10,7 +10,7 @@ import { useCreateSlots, useDeleteSlots, useUpdateSlots } from "../../../hooks/u
 import { useCreateBikes, useDeleteBikes, useUpdateBikes } from "../../../hooks/useAdminBikes";
 import { useCreateNotifications, useDeleteNotifications } from "../../../hooks/useAdminNotifications";
 
-export default function AdminTable({ columns, c_data, entity }) {
+export default function AdminTable({ columns, c_data, entity, updateEntity }) {
     const [data, setData] = useState(c_data)
     const [modValues, setModValues] = useState({})
     const [newRow, set_newRow] = useState(false)
@@ -181,7 +181,7 @@ export default function AdminTable({ columns, c_data, entity }) {
                                             )
                                         : <p>{row[column.name]}</p>)
                                     : <p>{ column.type == "options" && row[column.name] ? 
-                                            column.options[column.options.findIndex(o => o.val == row[column.name])].name 
+                                            ( column.options[column.options.findIndex(o => o.val == row[column.name])] ? column.options[column.options.findIndex(o => o.val == row[column.name])].name : null) 
                                         : row[column.name]}</p>}
                                 </td>
                             ))}
@@ -189,7 +189,7 @@ export default function AdminTable({ columns, c_data, entity }) {
                                 {row.editing
                                     ? <SaveIcon onClick={() => save_modRow(row, rowIndex)} />
                                     : <>
-                                        <EditIcon onClick={() => editableRow(rowIndex)} />
+                                        { updateEntity ? <EditIcon onClick={() => editableRow(rowIndex)} /> : null}
                                         <DeleteIcon onClick={() => deleteRow(row, rowIndex)} />
                                     </>}
 
