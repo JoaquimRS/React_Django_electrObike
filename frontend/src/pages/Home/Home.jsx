@@ -15,7 +15,6 @@ const Home = () => {
         setClient(authClient);
     }, [authClient]);
 
-    console.log(client);
     return (
         <div className="map-container">
             {client && client.has_rent ? <ActMontior rent={client.rents.filter(rent => rent.status != "4")[0]} /> : null}

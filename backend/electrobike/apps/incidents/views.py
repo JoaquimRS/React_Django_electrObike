@@ -14,19 +14,14 @@ class Incident(viewsets.GenericViewSet):
     #         self.permission_classes = [IsAuthUser]
     #     return super(Incident, self).get_permissions()
     def getIncidents(self,request):
-        # return Response(data=True, status=status.HTTP_200_OK)
         return Response(IncidentSerializer.getIncidents(), status=status.HTTP_200_OK)
     def addIncident(self,request):
-        return Response(data=True, status=status.HTTP_201_CREATED)
-        # return Response(IncidentSerializer.addIncident(request.data), status=status.HTTP_201_CREATED)
+        return Response(IncidentSerializer.addIncident(request.data), status=status.HTTP_201_CREATED)
     def deleteIncident(self, request, id_incident):
-        return Response(data=True, status=status.HTTP_200_OK)
-        # return Response(IncidentSerializer.deleteIncident(id_incident), status=status.HTTP_200_OK)
+        return Response(IncidentSerializer.deleteIncident(id_incident), status=status.HTTP_200_OK)
     def updateIncident(self, request, id_incident):
-        return Response(data=True, status=status.HTTP_200_OK)
-        # return Response(IncidentSerializer.updateIncident(request.data, id_incident), status=status.HTTP_200_OK)
+        return Response(IncidentSerializer.updateIncident(request.data, id_incident), status=status.HTTP_200_OK)
 
 class IncidentClient(viewsets.GenericViewSet):
     def newIncident(self, request):
-        return Response(data=True, status=status.HTTP_201_CREATED)
-        # return Response(IncidentSerializer.newIncident(request.data), status=status.HTTP_201_CREATED
+        return Response(IncidentSerializer.newIncident(request.data, request.user.id_client), status=status.HTTP_201_CREATED)
