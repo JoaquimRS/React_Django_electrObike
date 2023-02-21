@@ -17,10 +17,10 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 rents: []
             }
         case 'SET_ADMIN':
-            return payload ? {
+            return {
                 ...state,
                 admin: payload
-            } : null
+            }
         default:
             return state
     }

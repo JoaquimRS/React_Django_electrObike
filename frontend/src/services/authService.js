@@ -15,5 +15,8 @@ export default {
     },
     userLogin(user) {
         return response.post('/users/login', user)
+    },
+    isAdmin() {
+        return response.get('/users/isAuth')
     }
 }

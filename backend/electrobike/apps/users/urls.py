@@ -7,5 +7,6 @@ urlpatterns = [
     path('users/delete/<idUser>', User.as_view({'delete':'deleteUser'})),
     path('users/update/<idUser>', User.as_view({'put':'updateUser'})),
     path('users/login', AuthUser.as_view({'post':'login'})),
-    path('users/register', AuthUser.as_view({'post':'register'}))
+    path('users/register', AuthUser.as_view({'post':'register'})),
+    path('users/isAuth', User.as_view({'get': 'isAuth'}) )
 ]

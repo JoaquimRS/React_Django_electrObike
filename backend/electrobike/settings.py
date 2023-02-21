@@ -78,20 +78,26 @@ MIDDLEWARE = [
     
 ]
 
-# CORS_ALLOW_HEADERS = [
-#     "authorization-client",
-#     "authorization-admin"
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "authorization-user"
+]
 
-# ]
-# CORS_ALLOW_HEADERS = [
-#     "ximo"
-# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000','http://0.0.0.0:3000', "http://127.0.0.1:3000", "http://192.168.137.1:3000",
-    'http://192.168.27.45:3000', 'http://172.31.112.1:3000', 'http://172.20.10.2:3000', 'http://192.168.1.34:3000',
-    'http://192.168.56.1:3000', 'http://192.168.1.48:3000'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'http://localhost:3000','http://0.0.0.0:3000', "http://127.0.0.1:3000", "http://192.168.137.1:3000",
+#     'http://192.168.27.45:3000', 'http://172.31.112.1:3000', 'http://172.20.10.2:3000', 'http://192.168.1.34:3000',
+#     'http://192.168.56.1:3000', 'http://192.168.1.48:3000'
+# )
 
 ROOT_URLCONF = 'electrobike.urls'
 

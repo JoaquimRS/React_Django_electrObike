@@ -23,9 +23,9 @@ const responseToken = req => {
         req.set('Authorization', `Bearer ${localStorage.token}`);
     }
 
-    // if (localStorage.adminToken) {
-    //     req.set('AuthorizationAdmin', `Bearer ${localStorage.adminToken}`);
-    // }
+    if (localStorage.adminToken) {
+        req.set('authorization-user', `Bearer ${localStorage.adminToken}`);
+    }
 }
 
 const errorBody = err => {

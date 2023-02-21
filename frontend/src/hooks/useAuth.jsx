@@ -26,15 +26,25 @@ export default function useAuth() {
             dispatch({
                 type: 'SET_USER', payload: res.body.client
             });
-            AuthService.userLogin(user).then(res => {
-                JWTService.setAdminToken({ token: res.body.token, refresh_token: res.body.refresh_token })
-                console.log(res);
-            }).catch(err => {
-                console.log('No es admin');
-            })
+            loginAdmin(user)
             navigate("/home")
         }).catch(err => {
             showToastr('error', err.response.body.detail)
+        })
+    }, [])
+
+    const loginAdmin = useCallback((user) => {
+        const userAdmin = {
+            email: user.email,
+            password: user.password
+        }
+        AuthService.userLogin(userAdmin).then(res => {
+            JWTService.setAdminToken({ token: res.body.token, refresh_token: res.body.refresh_token })
+            dispatch({
+                type: 'SET_ADMIN', payload: true
+            });
+        }).catch(err => {
+            console.log('No es admin');
         })
     }, [])
 
@@ -51,6 +61,18 @@ export default function useAuth() {
         })
     }, [])
 
+    const profile = useCallback(() => {
+        AuthService.getProfile().then(res => {
+            console.log(res.body)
+            dispatch({ type: "SET_USER", payload: res.body })
+        })
+        AuthService.isAdmin().then(res => {
+            dispatch({ type: "SET_ADMIN", payload: true })
+        }).catch(err => {
+            dispatch({ type: "SET_ADMIN", payload: false })
+        })
+    }, [])
+
     const logout = useCallback(() => {
         JWTService.removeToken()
         dispatch({
@@ -59,5 +81,5 @@ export default function useAuth() {
         navigate("/home")
     }, [])
 
-    return { login, logout, toRegister }
+    return { login, logout, toRegister, loginAdmin, profile }
 }
