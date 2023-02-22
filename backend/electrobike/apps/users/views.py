@@ -19,6 +19,8 @@ class User(viewsets.GenericViewSet):
         return Response(UserSerializer.deleteUser(idUser), status=status.HTTP_200_OK)
     def updateUser(self, request, idUser):
         return Response(UserSerializer.updateUser(request.data, idUser), status=status.HTTP_200_OK)
+    def isAuth(self, request):
+        return Response(data=True, status=status.HTTP_200_OK)
 
 class AuthUser(viewsets.GenericViewSet):
     def login(self, request):

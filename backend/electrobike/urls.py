@@ -26,5 +26,6 @@ urlpatterns = [
     path('api/', include('electrobike.apps.bikes.urls')),
     path('api/', include('electrobike.apps.clients.urls')),
     path('api/', include('electrobike.apps.rents.urls')),
-    path('api/', include('electrobike.apps.notifications.urls'))
+    path('api/', include('electrobike.apps.notifications.urls')),
+    path('api/', include('electrobike.apps.incidents.urls'))
 ]

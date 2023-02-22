@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react"
 
 import JWTService from '../services/JWTService'
-import AuthService from "../services/authService"
-import { useDispatch } from "react-redux"
+import useAuth from "../hooks/useAuth"
 
 export const AuthContext = React.createContext()
 
 export function AuthContextProvider({ children }) {
 
-    const dispatch = useDispatch()
+    const { profile } = useAuth()
 
     useEffect(() => {
         const token = JWTService.getToken()
         if (token) {
-            AuthService.getProfile().then(res => {
-                dispatch({ type: "SET_USER", payload: res.body })
-            })
+            profile()
         }
     }, [])
 

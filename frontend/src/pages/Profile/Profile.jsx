@@ -6,7 +6,9 @@ import { useState } from "react";
 import User from "./User";
 import Reserves from "./Reserves";
 import Incidents from "./Incidents";
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Button } from "@mui/material";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const Profile = () => {
     const [page, setPage] = useState('/')
 
@@ -29,9 +31,11 @@ const Profile = () => {
                     <img src={user.avatar} alt="" />
                 </div>
                 {
-                    page !== '/' && <button onClick={handleMenu}>Menu</button>
+                    page !== '/' && <div className="button-back-menu" >
+                        <ArrowBackIcon onClick={handleMenu}   />
+                    </div>
                 }
-                <PageSelected page={page} setPage={setPage} />
+                <PageSelected page={page} setPage={setPage}  />
                 {
                     page === '/' && <button onClick={handleLogout}>Logout</button>
                 }
@@ -59,7 +63,7 @@ const PageSelected = ({ page, setPage }) => {
     ]
     switch (page) {
         case '/user':
-            return <User />
+            return <User setPage={setPage}/>
         case '/reservations':
             return <Reserves />
         case '/incidents':
@@ -88,7 +92,7 @@ const PageSection = ({ title, path, setPage }) => {
     return (
         <div className="section-profile" onClick={hundleClick}>
             <div>{title}</div>
-            <div>{'-->'}</div>
+            <div><ArrowForwardIcon/></div>
         </div>
     )
 }

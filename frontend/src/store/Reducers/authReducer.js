@@ -1,35 +1,30 @@
 const INITIAL_STATE = {
-    user: null
+    user: null,
+    rents: [],
+    incidents: [],
+    admin: false
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
         case 'SET_USER':
+            return payload ? {
+                ...state,
+                user: payload,
+                rents: payload.rents,
+                incidents: payload.incidents
+            } : {
+                ...state,
+                user: null,
+                rents: [],
+                incidents: []
+            }
+        case 'SET_ADMIN':
             return {
                 ...state,
-                user: payload
+                admin: payload
             }
         default:
             return state
     }
 }
-
-
-// export const authSlice = createSlice({
-//     name: 'auth',
-//     initialState: {
-//         user: null
-//     },
-//     reducers: {
-//         setUser: (state, action) => {
-//             state.user = action.payload
-//         }
-//     }
-// })
-
-// export const { setUser } = authSlice.actions
-
-
-
-
-// export default authSlice.reducer

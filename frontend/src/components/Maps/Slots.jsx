@@ -6,7 +6,7 @@ import { rentsService } from '../../services';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthService from '../../services/authService';
 
-export default function SlotsItem({ slots }) {
+export default function SlotsItem({ slots, handleModal }) {
     const orderSlots = [...slots].sort((a, b) => a.number - b.number)
 
     return (
@@ -20,6 +20,7 @@ export default function SlotsItem({ slots }) {
                         return <BikeSlot
                             key={i}
                             slot={slot}
+                            handleModal={handleModal}
                         />
                     })
                 }
@@ -31,7 +32,7 @@ export default function SlotsItem({ slots }) {
     )
 }
 
-function BikeSlot({ slot }) {
+function BikeSlot({ slot, handleModal }) {
     const [confirmDialog, setConfirm] = useState(false)
     const [confirmSlotDialog, setSlotDialog] = useState(false)
     const authClient = useSelector(state => state.auth.user)
@@ -41,15 +42,23 @@ function BikeSlot({ slot }) {
         setClient(authClient)
     }, [authClient])
 
-    const handleClose = () => {
+    const handleClose = (reserve) => {
         setConfirm(false)
+
+        if (reserve) {
+            handleModal()
+        }
     }
     const handleClick = () => {
         setConfirm(true)
     }
 
-    const handleSlotClose = () => {
+    const handleSlotClose = (reserve) => {
         setSlotDialog(false)
+
+        if (reserve) {
+            handleModal()
+        }
     }
 
     const reserveSlot = () => {
@@ -61,19 +70,19 @@ function BikeSlot({ slot }) {
             {
                 slot.bike_id
                     ? <img src="src/assets/bikes/slot-bike.png" onClick={handleClick} alt="50px" />
-                    : <img src="src/assets/bikes/slot-free.png" alt="50px" onClick={client ? (client.has_rent ? reserveSlot : null) : null}/>
+                    : <img src="src/assets/bikes/slot-free.png" alt="50px" onClick={client ? (client.has_rent ? reserveSlot : null) : null} />
             }
             <span>{slot.number}</span>
             {
                 slot.bike_id
                     ? <BikeDialog confirmDialog={confirmDialog} handleClose={handleClose} bike={slot.bike} />
                     : null
-                
+
             }
             {
                 client
-                ? <SlotDialog confirmDialog={confirmSlotDialog} handleClose={handleSlotClose} slot={slot}/>
-                : null
+                    ? <SlotDialog confirmDialog={confirmSlotDialog} handleClose={handleSlotClose} slot={slot} />
+                    : null
             }
         </div>
     )
@@ -97,6 +106,7 @@ const BikeDialog = ({ confirmDialog, handleClose, bike }) => {
                     show: true
                 }
             })
+            handleClose(true)
             AuthService.getProfile().then(res => {
                 dispatch({ type: "SET_USER", payload: res.body })
             })
@@ -148,6 +158,7 @@ const SlotDialog = ({ confirmDialog, handleClose, slot }) => {
                     show: true
                 }
             })
+            handleClose(true)
             AuthService.getProfile().then(res => {
                 dispatch({ type: "SET_USER", payload: res.body })
             })

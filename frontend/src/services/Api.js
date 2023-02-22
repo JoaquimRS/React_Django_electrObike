@@ -8,8 +8,11 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 // const dispatch = useDispatch()
 
+// const API_ROOT = "http://localhost:8000/api";
 // const API_ROOT = "http://172.20.10.2:8000/api";
-const API_ROOT = "http://localhost:8000/api";
+const API_ROOT = "http://192.168.137.1:8000/api"
+// const API_ROOT = "http://192.168.56.1:8000/api"
+// const API_ROOT = "http://192.168.1.48:8000/api"
 
 const responseBody = res => {
     return res
@@ -19,9 +22,13 @@ const responseToken = req => {
     if (localStorage.token) {
         req.set('Authorization', `Bearer ${localStorage.token}`);
     }
+
+    if (localStorage.adminToken) {
+        req.set('authorization-user', `Bearer ${localStorage.adminToken}`);
+    }
 }
 
-const errorBody = err => {    
+const errorBody = err => {
     console.log(err.response.body.detail);
     if (err.status == 401 || err.status == 403) {
         JWTService.removeToken()
