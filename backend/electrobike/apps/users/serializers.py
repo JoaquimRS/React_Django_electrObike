@@ -58,7 +58,7 @@ class LoginSerializer(serializers.ModelSerializer):
             argon2.PasswordHasher().verify(user.password, infoUser['password'])
             return AuthUserDictionary.response_user(user,status=status.HTTP_202_ACCEPTED)
         except Exception as e:
-            return Response({'error':"El cliente o la contraseña son incorrectos"},status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'detail':"El usuario o la contraseña son incorrectos"},status=status.HTTP_400_BAD_REQUEST)
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:

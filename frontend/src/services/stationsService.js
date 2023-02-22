@@ -5,7 +5,7 @@ export default {
         return response.get('/stations')
     },
     addStations(newStation) {
-        return response.post('/stations/create',newStation)
+        return response.post('/stations/create', newStation)
     },
     deleteStations(idStation) {
         return response.del(`/stations/delete/${idStation}`)
@@ -13,5 +13,4 @@ export default {
     updateStations(idStation, modStation) {
         return response.put(`/stations/update/${idStation}`, modStation)
     }
-
 }

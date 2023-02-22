@@ -34,7 +34,7 @@ export default function ElectroDialog({ open, handleModal, item, slots }) {
                 }}
                 >
                     {slots.length !== 0 ? (<div className="slots-main">
-                        <SlotsItem slots={slots} />
+                        <SlotsItem slots={slots} handleModal={handleModal} />
                     </div>) : <div>No hay slots disponibles disculpe la molestias</div>}
                 </Box>
 

@@ -7,17 +7,17 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
     useStations();
-    
+
     const authClient = useSelector(state => state.auth.user);
     const [client, setClient] = useState(null);
 
     useEffect(() => {
-        setClient(authClient);    
+        setClient(authClient);
     }, [authClient]);
 
     return (
         <div className="map-container">
-            {client && client.has_rent ? <ActMontior rent={client.rents.filter(rent => rent.status != "4")[0]}/> : null}
+            {client && client.has_rent ? <ActMontior rent={client.rents.filter(rent => rent.status != "4")[0]} /> : null}
             <Maps />
         </div>
     );

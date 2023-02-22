@@ -47,7 +47,7 @@ const NFC = () => {
                     dispatch({
                         type: 'SET_TOASTR', payload: {
                             type: 'success',
-                            message: "Has dejado la Bici " +slugBike.split("_")[0],
+                            message: "Has dejado la Bici " + slugBike.split("_")[0],
                             show: true
                         }
                     })
