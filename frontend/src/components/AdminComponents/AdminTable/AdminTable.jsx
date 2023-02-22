@@ -12,6 +12,7 @@ import { useCreateNotifications, useDeleteNotifications } from "../../../hooks/u
 import { useDeleteRents } from "../../../hooks/useAdminRents";
 import { useCreateUsers, useDeleteUsers, useUpdateUsers } from "../../../hooks/useAdminUsers";
 import { useDeleteClients } from "../../../hooks/useAdminClients";
+import { useDeleteIncidents, useCreateIncidents, useUpdateIncidents } from "../../../hooks/useAdminIncidents";
 
 export default function AdminTable({ columns, c_data, entity, updateEntity = true, deleteEntity = true, addEntity = true }) {
     const [data, setData] = useState(c_data)
@@ -43,13 +44,13 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                 setData(newData)
                 toastr("success", response.msg);
             })
-            .catch((error) => { 
+            .catch((error) => {
                 let msg
-                try {msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]} 
-                catch (error) {msg = "Ha ocurrido un error"}     
+                try { msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]] }
+                catch (error) { msg = "Ha ocurrido un error" }
                 toastr("error", msg);
             });
-        
+
     };
     const add_newRow = () => {
         set_newRow(true)
@@ -84,10 +85,10 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                     setNewValues({})
                     toastr("success", response.msg);
                 })
-                .catch((error) => {      
+                .catch((error) => {
                     let msg
-                    try {msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]} 
-                    catch (error) {msg = "Ha ocurrido un error"}     
+                    try { msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]] }
+                    catch (error) { msg = "Ha ocurrido un error" }
                     toastr("error", msg);
                 });
         }
@@ -132,9 +133,9 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                 })
                 .catch((error) => {
                     let msg
-                    try {msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]]} 
-                    catch (error) {msg = "Ha ocurrido un error"}     
-                    toastr("error", msg);   
+                    try { msg = (Object.keys(error.response.body)[0] == "detail" ? "" : Object.keys(error.response.body)[0].toUpperCase()) + " " + error.response.body[Object.keys(error.response.body)[0]] }
+                    catch (error) { msg = "Ha ocurrido un error" }
+                    toastr("error", msg);
                 })
         }
     }
@@ -165,9 +166,9 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                             {columns.map((column, columnIndex) => (
                                 <td key={columnIndex}>
                                     {row.editing ? (
-                                        column.edit ? 
-                                            ( column.type == "options" ?
-                                                <select onChange={(e) => changeModInput(column.name, e.target.value)} defaultValue={  row[column.name] ? row[column.name] : "none"}>
+                                        column.edit ?
+                                            (column.type == "options" ?
+                                                <select onChange={(e) => changeModInput(column.name, e.target.value)} defaultValue={row[column.name] ? row[column.name] : "none"}>
                                                     <option value="none" className="disabled" disabled>Seleccionar Opción</option>
                                                     {column.options.map(option => (
                                                         <option key={option.val} value={option.val}>{option.name}</option>
@@ -182,17 +183,17 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                                                     onChange={(e) => changeModInput(column.name, e.target.value)}
                                                 />
                                             )
-                                        : <p>{row[column.name]}</p>)
-                                    : <p>{ column.type == "options" && row[column.name] ? 
-                                            ( column.options[column.options.findIndex(o => o.val == row[column.name])] ? column.options[column.options.findIndex(o => o.val == row[column.name])].name : null) 
-                                        : ( column.type == "password" ? "••••••••••••" : row[column.name] )}</p>}
+                                            : <p>{row[column.name]}</p>)
+                                        : <p>{column.type == "options" && row[column.name] ?
+                                            (column.options[column.options.findIndex(o => o.val == row[column.name])] ? column.options[column.options.findIndex(o => o.val == row[column.name])].name : null)
+                                            : (column.type == "password" ? "••••••••••••" : row[column.name])}</p>}
                                 </td>
                             ))}
                             <td className="action-icons">
                                 {row.editing
                                     ? <SaveIcon onClick={() => save_modRow(row, rowIndex)} />
                                     : <>
-                                        { updateEntity ? <EditIcon onClick={() => editableRow(rowIndex)} /> : null}
+                                        {updateEntity ? <EditIcon onClick={() => editableRow(rowIndex)} /> : null}
                                         <DeleteIcon onClick={() => deleteRow(row, rowIndex)} />
                                     </>}
 
@@ -204,8 +205,8 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                         ? <tr className="new-row">
                             {columns.map((column, index) => (
                                 <td key={index}>
-                                    { column.edit ?
-                                        ( column.type == "options" ? 
+                                    {column.edit ?
+                                        (column.type == "options" ?
                                             <select onChange={(e) => changeNewInput(column.name, e.target.value)} defaultValue="none">
                                                 <option value="none" className="disabled" disabled>Seleccionar Opción</option>
                                                 {column.options.map(option => (
@@ -219,14 +220,14 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                                                 onChange={(e) => changeNewInput(column.name, e.target.value)}
                                             />
                                         )
-                                    : <p>-</p> }
+                                        : <p>-</p>}
                                 </td>
                             ))}
                             <td className="action-icons">
                                 <SaveIcon onClick={() => save_newRow()} />
                             </td>
                         </tr>
-                        : ( addEntity ? <tr>
+                        : (addEntity ? <tr>
                             <td colSpan={columns.length + 1} className="add-row" onClick={() => add_newRow()}>
                                 <AddCircleIcon />
                             </td>
