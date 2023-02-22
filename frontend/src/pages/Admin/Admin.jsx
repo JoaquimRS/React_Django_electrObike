@@ -12,7 +12,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Bikes, Incidents, Notifications, Rents, Slots, Stations, Clients, Users, Dashboard } from '../../components/AdminComponents';
 import { useEffect, useState } from 'react';
 import { ThreeDots } from  'react-loader-spinner'
-
+import { useNavigate } from 'react-router-dom'
 const Admin = () => {
     const [main_component, set_main_component] = useState(<Dashboard />)
     const [loading, set_loading] = useState(false);
@@ -28,6 +28,7 @@ const Admin = () => {
         { icon: <AdminPanelSettingsIcon />, name: "Users", component: <Users /> },
     ]
 
+    const navigate = useNavigate()
     useEffect(() => {
         set_loading(true);
         setTimeout(() => {
@@ -38,7 +39,7 @@ const Admin = () => {
     return (
         <main className='root-admin'>
             <div className='nav'>
-                <div className='title' navigate="/home">
+                <div className='title' onClick={() => navigate("/home")}>
                     <h1>electr</h1>
                     <img src="/electrObike_icono.png" />
                     <h1>bike</h1>
@@ -51,7 +52,7 @@ const Admin = () => {
                     </div>
                 ))}
 
-                <div className='exit-page'>
+                <div className='exit-page' onClick={() => navigate("/home")}>
                     <ExitToAppIcon />
                     <p className='name'>Exit</p>
                 </div>
