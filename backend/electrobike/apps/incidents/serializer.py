@@ -5,7 +5,9 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework import exceptions
-
+from electrobike.apps.bikes.models import Bike
+from electrobike.apps.stations.models import Station
+from electrobike.apps.slots.models import Slot
 
 class IncidentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +44,26 @@ class IncidentSerializer(serializers.ModelSerializer):
             msg = 'Incident no existe.'
             raise exceptions.NotFound(msg)
     def newIncident(data, idClient):
+        
+        if data['type'] == 'bike':
+            try:
+                Bike.objects.get(id_bike=data['id_type'])
+            except Bike.DoesNotExist:
+                msg = 'El objeto no existe en la tabla de bicicletas.' 
+                raise exceptions.NotFound(msg)
+        if data['type'] == 'station':
+            try:
+                Station.objects.get(id_station=data['id_type'])
+            except Station.DoesNotExist:
+                msg = 'El objeto no existe en la tabla de estaciones.' 
+                raise exceptions.NotFound(msg)
+        if data['type'] == 'slot':
+            try:
+                Slot.objects.get(id_slot=data['id_type'])
+            except Slot.DoesNotExist:
+                msg = 'El objeto no existe en la tabla de slots.' 
+                raise exceptions.NotFound(msg)
+            
         data["id_client"] = idClient
         serializer = IncidentSerializer(data=data)
         serializer.is_valid(raise_exception=True)

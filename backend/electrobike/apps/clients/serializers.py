@@ -79,10 +79,12 @@ class ClientDictionary(serializers.ModelSerializer):
         }
         if instance.type == 'bike':
             newData['object'] = BikeDictionary.to_bike(Bike.objects.get(id_bike=instance.id_type))
+            print(newData['object'])
         if instance.type == 'slot':
             newData['object'] =  SlotDictionary.to_slots(Slot.objects.get(id_slot=instance.id_type))
         if instance.type == 'station':
             newData['object'] =  StationDictionary.to_stations(Station.objects.get(id_station=instance.id_type))
+        
         return newData
     def to_notification(instance):
         return {
