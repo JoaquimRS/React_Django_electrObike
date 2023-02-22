@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 export default function Incidents() {
 
     const incidents = useSelector(state => state.auth.incidents)
-    console.log(incidents);
 
     return (
         <div className='main-insident'>
@@ -20,8 +19,6 @@ export default function Incidents() {
 }
 
 const Incident = ({ incident }) => {
-    console.log(incident);
-
 
     return (
         <div className='insident-container'>

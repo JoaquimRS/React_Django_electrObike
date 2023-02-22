@@ -255,19 +255,23 @@
         width: 100%;
         gap: 10px;
     }
+
     .slot-free-container {
         display: flex;
         justify-content: center;
         width: 200px;
         height: 200px;
         position: relative;
+
         .slot-free {
             max-height: 100%;
             width: auto;
         }
+
         .last-slot {
             transform: rotateY(180deg) translateX(1px);
         }
+
         span {
             position: absolute;
             bottom: 0;
@@ -284,4 +288,16 @@
 .bike-loader {
     max-width: 100%;
     mix-blend-mode: color-burn;
+}
+
+.main-incidencia {
+    padding: 25px;
+
+    .button-send-incidence {
+        text-align: right;
+        padding-top: 15px;
+        // background-color: red;
+    }
+
+
 }
