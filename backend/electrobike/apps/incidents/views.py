@@ -7,12 +7,12 @@ from electrobike.apps.core.permissions import (IsAuthUser, IsManager)
 
 
 class Incident(viewsets.GenericViewSet):
-    # def get_permissions(self):
-    #     if self.request.method in ('POST','PUT','DELETE'):
-    #         self.permission_classes = [IsAuthUser, IsManager]
-    #     else:
-    #         self.permission_classes = [IsAuthUser]
-    #     return super(Incident, self).get_permissions()
+    def get_permissions(self):
+        if self.request.method in ('POST','PUT','DELETE'):
+            self.permission_classes = [IsAuthUser, IsManager]
+        else:
+            self.permission_classes = [IsAuthUser]
+        return super(Incident, self).get_permissions()
     def getIncidents(self,request):
         return Response(IncidentSerializer.getIncidents(), status=status.HTTP_200_OK)
     def addIncident(self,request):
