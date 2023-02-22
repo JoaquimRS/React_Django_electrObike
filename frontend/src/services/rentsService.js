@@ -12,7 +12,11 @@ export default {
     },
     leaveBike(slugBike) {
         return response.get(`/rents/leave/bike/${slugBike}`)
+    },
+    getRents() {
+        return response.get('/rents')
+    },
+    deleteRents(idRent) {
+        return response.del(`/rents/delete/${idRent}`)
     }
-
-
 }

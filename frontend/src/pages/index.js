@@ -6,7 +6,7 @@ const Notification = lazy(() => import('./Notification/Notification'));
 const ErrorNF = lazy(() => import('./Error/ErrorNF'))
 const Login = lazy(() => import('./Auth/Login'))
 const NFC = lazy(() => import('./Home/NFC'))
-
+const Admin = lazy(() => import('./Admin/Admin'))
 const User = lazy(() => import('./Profile/User'))
 const Reserves = lazy(() => import('./Profile/Reserves'))
 const Incidents = lazy(() => import('./Profile/Incidents'))
@@ -20,6 +20,8 @@ export {
     Login,
     User,
     Reserves,
-    Incidents
+    Incidents,
+    Admin
+
 }
 

@@ -146,7 +146,17 @@ class RentSerializer(serializers.ModelSerializer):
             return RentDictionary.to_rent(rent)
         except Bike.DoesNotExist:
             raise exceptions.NotFound('Bike no existe')
-        
+    def getRents():
+        queryset = Rent.objects.all()
+        return [RentDictionary.to_rent(rent) for rent in queryset]
+    def deleteRent(idRent):
+        try:
+            rent = Rent.objects.get(id_rent=idRent)
+            rent.delete()
+            return {'msg':'Rent borrada correctamente'}
+        except Rent.DoesNotExist:
+            msg = 'Rent no existe.'
+            raise exceptions.NotFound(msg)
   
 class RentDictionary(serializers.ModelSerializer):
     def to_rent(instance):

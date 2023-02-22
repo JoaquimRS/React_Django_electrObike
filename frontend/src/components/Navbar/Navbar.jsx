@@ -16,10 +16,9 @@ const Navbar = () => {
     }, [authClient])
 
     const location = useLocation()
-
     const activeProfile = ['/profile', '/login', '/register', '/profile/user', '/profile/reservations', '/profile/incidents']
 
-    return (
+    return !location.pathname.includes('/admin') ? (
         < div className="navbar-container" >
             <nav>
                 <Link to="/notification" className={location.pathname === '/notification' ? 'active' : null}>
@@ -41,6 +40,6 @@ const Navbar = () => {
                 </Link>
             </nav>
         </div >
-    )
+    ) : null
 }
 export default Navbar

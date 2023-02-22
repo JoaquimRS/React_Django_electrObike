@@ -10,7 +10,7 @@ import AuthGuard from './services/guards/AuthGuard';
 import { AuthContextProvider } from "./context/AuthContext";
 
 import { Navbar } from './components';
-import { Profile, Notification, Home, NFC, ErrorNF, Login } from './pages';
+import { Profile, Notification, Home, NFC, ErrorNF, Login, Admin } from './pages';
 import Toastr from './components/Toastr/Toastr';
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
 
 
               <Route path='/notification' element={<Notification />} />
+              <Route path='/admin' element={<Admin />}/>
               <Route path={'*'} element={<ErrorNF />} />
             </Routes>
           </AuthContextProvider>
