@@ -33,11 +33,12 @@ class UserSerializer(serializers.ModelSerializer):
             # Get the oldUser and check if exists
             oldUser = User.objects.get(id_user=idUser)
             # Validate User
-            if modUser['email'] == oldUser.email:
+            if modUser.get('email') == oldUser.email:
                 modUser.pop('email',None)
             UserSerializer(oldUser, data=modUser, partial=True).is_valid(raise_exception=True)
             # Hash Password
-            modUser['password'] = argon2.PasswordHasher().hash(modUser['password'])
+            if modUser.get('password'):
+                modUser['password'] = argon2.PasswordHasher().hash(modUser['password'])
             # Update the user
             User.objects.filter(id_user=idUser).update(**modUser)
             # Find the final User and return

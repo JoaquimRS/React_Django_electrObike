@@ -10,6 +10,7 @@ import { useCreateSlots, useDeleteSlots, useUpdateSlots } from "../../../hooks/u
 import { useCreateBikes, useDeleteBikes, useUpdateBikes } from "../../../hooks/useAdminBikes";
 import { useCreateNotifications, useDeleteNotifications } from "../../../hooks/useAdminNotifications";
 import { useDeleteRents } from "../../../hooks/useAdminRents";
+import { useCreateUsers, useDeleteUsers, useUpdateUsers } from "../../../hooks/useAdminUsers";
 
 export default function AdminTable({ columns, c_data, entity, updateEntity = true, deleteEntity = true, addEntity = true }) {
     const [data, setData] = useState(c_data)
@@ -183,7 +184,7 @@ export default function AdminTable({ columns, c_data, entity, updateEntity = tru
                                         : <p>{row[column.name]}</p>)
                                     : <p>{ column.type == "options" && row[column.name] ? 
                                             ( column.options[column.options.findIndex(o => o.val == row[column.name])] ? column.options[column.options.findIndex(o => o.val == row[column.name])].name : null) 
-                                        : row[column.name]}</p>}
+                                        : ( column.type == "password" ? "••••••••••••" : row[column.name] )}</p>}
                                 </td>
                             ))}
                             <td className="action-icons">
