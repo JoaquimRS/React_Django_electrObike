@@ -10,3 +10,15 @@ export default function useAdminClients() {
     }, [])
     return clients
 }
+
+export function useDeleteClients(client) {
+    return new Promise((resolve, reject) => {
+        clientsService.deleteClients(client.id_client)
+          .then((res) => {
+              resolve(res.body);
+          })
+          .catch((err) => {
+              reject(err);
+          });
+      });
+}

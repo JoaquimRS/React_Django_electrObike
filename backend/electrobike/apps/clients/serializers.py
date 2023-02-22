@@ -36,6 +36,14 @@ class ClientSerializer(serializers.ModelSerializer):
     def getClients():
         queryset = Client.objects.all()
         return [ClientDictionary.to_client(client) for client in queryset]
+    def deleteClient(idClient):
+        try:
+            client = Client.objects.get(id_client=idClient)
+            client.delete()
+            return {'msg':"Cliente borrado correctamente"}
+        except Client.DoesNotExist:
+            msg = "Client no existe."
+            raise exceptions.NotFound(msg)
     
 class ClientDictionary(serializers.ModelSerializer):        
     def to_rent(instance):

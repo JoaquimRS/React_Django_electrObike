@@ -14,3 +14,5 @@ class Clients(viewsets.GenericViewSet):
     permission_classes = (IsAuthUser,)
     def getClients(self, request):
         return Response(ClientSerializer.getClients(), status=status.HTTP_200_OK)
+    def deleteClient(self, request, idClient):
+        return Response(ClientSerializer.deleteClient(idClient), status=status.HTTP_200_OK)

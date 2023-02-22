@@ -11,6 +11,7 @@ import { useCreateBikes, useDeleteBikes, useUpdateBikes } from "../../../hooks/u
 import { useCreateNotifications, useDeleteNotifications } from "../../../hooks/useAdminNotifications";
 import { useDeleteRents } from "../../../hooks/useAdminRents";
 import { useCreateUsers, useDeleteUsers, useUpdateUsers } from "../../../hooks/useAdminUsers";
+import { useDeleteClients } from "../../../hooks/useAdminClients";
 
 export default function AdminTable({ columns, c_data, entity, updateEntity = true, deleteEntity = true, addEntity = true }) {
     const [data, setData] = useState(c_data)
