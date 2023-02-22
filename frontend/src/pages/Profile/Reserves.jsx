@@ -20,8 +20,6 @@ export default function Reserves() {
 
 const Rent = ({ rent }) => {
 
-    console.log(rent.status);
-
     function msToTime(duration) {
         let seconds = Math.floor((duration / 1000) % 60),
             minutes = Math.floor((duration / (1000 * 60)) % 60),
