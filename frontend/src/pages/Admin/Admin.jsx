@@ -10,10 +10,12 @@ import User from '../../assets/icons/User';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Bikes, Incidents, Notifications, Rents, Slots, Stations, Clients, Users, Dashboard } from '../../components/AdminComponents';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ThreeDots } from  'react-loader-spinner'
 
 const Admin = () => {
-    const [main_component, set_main_component] = useState(<Clients />)
+    const [main_component, set_main_component] = useState(<Dashboard />)
+    const [loading, set_loading] = useState(false);
     const admin_pages = [
         { icon: <HomeIcon />, name: "Dashboard", component: <Dashboard /> },
         { icon: <Station />, name: "Stations", component: <Stations /> },
@@ -25,6 +27,13 @@ const Admin = () => {
         { icon: <User />, name: "Clients", component: <Clients /> },
         { icon: <AdminPanelSettingsIcon />, name: "Users", component: <Users /> },
     ]
+
+    useEffect(() => {
+        set_loading(true);
+        setTimeout(() => {
+            set_loading(false);
+        }, 700);
+    }, [main_component])
 
     return (
         <main className='root-admin'>
@@ -48,6 +57,18 @@ const Admin = () => {
                 </div>
             </div>
             <div className='main'>
+                {loading ? <div className='spinner'>
+                    <ThreeDots
+                        height="80"
+                        width="80"
+                        radius="9"
+                        color="#2b2b2b"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                    />
+                </div> : null}
                 {main_component}
             </div>
         </main>
