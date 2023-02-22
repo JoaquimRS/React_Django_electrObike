@@ -70,7 +70,7 @@ const IncidentDialog = ({ open, handleModal, item }) => {
             item.id_type = id_type
         }
         saveIncident(item)
-        console.log(item)
+        handleModal()
     }
 
 
