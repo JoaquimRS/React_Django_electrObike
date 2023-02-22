@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { incidentService } from '../services'
 import { useDispatch } from 'react-redux'
+import authService from '../services/authService'
 
 export default function useIncident() {
     const dispatch = useDispatch()
@@ -13,6 +14,10 @@ export default function useIncident() {
                 show: true
             }
         });
+        authService.getProfile().then(res => {
+            console.log(res.body);
+            dispatch({ type: "SET_USER", payload: res.body })
+        })
     }, [])
 
     const saveIncident = (incident) => {
