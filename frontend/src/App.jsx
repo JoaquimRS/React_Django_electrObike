@@ -10,7 +10,7 @@ import NoAuth from './services/guards/NoAuthGuard';
 import { AuthContextProvider } from "./context/AuthContext";
 
 import { Navbar } from './components';
-import { Profile, Notification, Home, NFC, ErrorNF, Login, Register } from './pages';
+import { Profile, Notification, Home, NFC, ErrorNF, Login, Register, Admin } from './pages';
 import Toastr from './components/Toastr/Toastr';
 
 function App() {

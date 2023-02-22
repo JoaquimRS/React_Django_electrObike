@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import AuthService from "../services/authService"
@@ -44,7 +44,6 @@ export default function useAuth() {
                 type: 'SET_ADMIN', payload: true
             });
         }).catch(err => {
-            console.log('No es admin');
         })
     }, [])
 
@@ -63,14 +62,15 @@ export default function useAuth() {
 
     const profile = useCallback(() => {
         AuthService.getProfile().then(res => {
-            console.log(res.body)
             dispatch({ type: "SET_USER", payload: res.body })
         })
-        AuthService.isAdmin().then(res => {
-            dispatch({ type: "SET_ADMIN", payload: true })
-        }).catch(err => {
-            dispatch({ type: "SET_ADMIN", payload: false })
-        })
+        if (JWTService.getAdminToken()) {
+            AuthService.isAdmin().then(res => {
+                dispatch({ type: "SET_ADMIN", payload: true })
+            }).catch(err => {
+                dispatch({ type: "SET_ADMIN", payload: false })
+            })
+        }
     }, [])
 
     const logout = useCallback(() => {

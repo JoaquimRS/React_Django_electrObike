@@ -8,10 +8,9 @@ from electrobike.apps.clients.models import Client
 from electrobike.apps.users.models import User
 
 
-class JWTAuthenticationClient(authentication.BaseAuthentication):
+class JWTAuthenticationUser(authentication.BaseAuthentication):
     authentication_header_prefix = 'Bearer'
     def authenticate(self, request):
-        
         """
         The `authenticate` method is called on every request, regardless of
         whether the endpoint requires authentication. 
@@ -32,8 +31,12 @@ class JWTAuthenticationClient(authentication.BaseAuthentication):
         handle the rest.
         """
         request.user = None
-        
-        auth_header = authentication.get_authorization_header(request).split()
+        request.User = None
+
+        if not 'Authorizationuser' in request.headers:
+            return None
+            
+        auth_header = request.headers['Authorizationuser'].split()
         auth_header_prefix = self.authentication_header_prefix.lower()
 
         if not auth_header:
@@ -44,10 +47,9 @@ class JWTAuthenticationClient(authentication.BaseAuthentication):
 
         elif len(auth_header) > 2:
             return None
-
-        prefix = auth_header[0].decode('utf-8')
-        token = auth_header[1].decode('utf-8')
-
+        
+        prefix = auth_header[0]
+        token = auth_header[1]
         if prefix.lower() != auth_header_prefix:
             return None
 
@@ -62,11 +64,14 @@ class JWTAuthenticationClient(authentication.BaseAuthentication):
             payload = jwt.decode(token, settings.SECRET_KEY)
         except:
             msg = 'Invalid authentication. Could not decode token.'
-            raise exceptions.AuthenticationFailed(msg)
-        try:
-            client = Client.objects.get(email=payload['email'])
-        except Client.DoesNotExist:
-            msg = 'No client matching this token was found.'
-            raise exceptions.AuthenticationFailed(msg)
-        request.Client = client
-        return (client, token)
+            raise exceptions.AuthenticationFailed(msg)        
+        if 'role' in payload:
+            try:
+                user = User.objects.get(email=payload['email'])
+            except User.DoesNotExist:
+                msg = 'No user matching this token was found.'
+                raise exceptions.AuthenticationFailed(msg)
+            request.User = user
+            return None
+        raise exceptions.AuthenticationFailed("Token has no Role")
+        

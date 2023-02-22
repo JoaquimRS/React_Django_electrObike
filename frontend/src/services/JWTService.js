@@ -6,6 +6,9 @@ const JWTService = {
         window.localStorage.setItem('token', token)
         window.localStorage.setItem('refreshToken', refresh_token)
     },
+    getAdminToken: () => {
+        return window.localStorage.getItem('adminToken')
+    },
     setAdminToken: ({ token, refresh_token }) => {
         window.localStorage.setItem('adminToken', token)
         window.localStorage.setItem('adminRefreshToken', refresh_token)
