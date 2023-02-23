@@ -38,9 +38,9 @@ export function useCreateIncidents(incident) {
 
 
 
-export function useUpdateIncidents(incident, rowincident) {
+export function useUpdateIncidents(incident, rowIncident) {
     return new Promise((resolve, reject) => {
-        incidentsService.updateIncidents(rowincident.id_incident, incident)
+        incidentsService.updateIncidents(rowIncident.id_incident, incident)
             .then((res) => {
                 resolve(res.body)
             })

@@ -30,15 +30,18 @@ const Profile = () => {
                 <div className="img-container">
                     <img src={user.avatar} alt="" />
                 </div>
+                <div className="sections">
+
                 {
-                    page !== '/' && <div className="button-back-menu" >
-                        <ArrowBackIcon onClick={handleMenu}   />
+                    page !== '/' && <div className="button-back-menu" onClick={handleMenu} >
+                        <ArrowBackIcon />
                     </div>
                 }
                 <PageSelected page={page} setPage={setPage}  />
                 {
-                    page === '/' && <button onClick={handleLogout}>Logout</button>
+                    page === '/' && <button className="logout-button" onClick={handleLogout}>Logout</button>
                 }
+                </div>
 
             </div>
         </div>

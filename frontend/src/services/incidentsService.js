@@ -10,10 +10,10 @@ export default {
     addIncidents(incident) {
         return response.post('/incidents/create', incident)
     },
-    deleteIncidents(id) {
-        return response.delete(`/incidents/delete/${id}`)
+    deleteIncidents(idIncident) {
+        return response.del(`/incidents/delete/${idIncident}`)
     },
-    updateIncidents(id, incident) {
-        return response.put(`/incidents/update/${id}`, incident)
+    updateIncidents(idIncident, incident) {
+        return response.put(`/incidents/update/${idIncident}`, incident)
     }
 }

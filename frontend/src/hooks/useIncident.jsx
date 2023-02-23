@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { incidentService } from '../services'
+import { incidentsService } from '../services'
 import { useDispatch } from 'react-redux'
 import authService from '../services/authService'
 
@@ -21,7 +21,7 @@ export default function useIncident() {
     }, [])
 
     const saveIncident = (incident) => {
-        incidentService.newIncident(incident).then((res) => {
+        incidentsService.newIncident(incident).then((res) => {
             showToastr('success', 'Incidente creado correctamente')
         }).catch((err) => {
             showToastr('error', 'Error al crear el incidente')

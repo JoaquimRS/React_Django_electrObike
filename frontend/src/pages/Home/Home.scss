@@ -1,5 +1,5 @@
 .map-container {
-    height: 100vh;
+    height: 89vh;
     width: 100%;
 }
 
@@ -301,4 +301,9 @@
     }
 
 
+}
+@media (min-width: 1200px) {
+    .map-container {
+        height: 100vh;
+    }
 }

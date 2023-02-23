@@ -19,7 +19,7 @@ class IncidentSerializer(serializers.ModelSerializer):
     def addIncident(data):
         serializer = IncidentSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        return IncidentDictionary.to_incident(serializer.save())
+        return {'msg':"Incident creado correctamnete", 'incident':IncidentDictionary.to_incident(serializer.save())}
     def deleteIncident(idIncident):
         try:
             incident = Incident.objects.get(id_incident=idIncident)
@@ -39,7 +39,7 @@ class IncidentSerializer(serializers.ModelSerializer):
             Incident.objects.filter(id_incident=idIncident).update(**data)
             # Find the final Incident and return
             incident = Incident.objects.get(id_incident=idIncident)
-            return IncidentDictionary.to_incident(incident)
+            return {'msg':"Incident modificado correctamente",'incident':IncidentDictionary.to_incident(incident)}
         except Incident.DoesNotExist:
             msg = 'Incident no existe.'
             raise exceptions.NotFound(msg)

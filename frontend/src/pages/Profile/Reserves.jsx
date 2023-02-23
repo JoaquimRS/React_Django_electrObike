@@ -5,16 +5,18 @@ export default function Reserves() {
     const rents = useSelector(state => state.auth.rents)
 
     return (
-        <div className="main-rent">
+        <>
             <h1>Reserves</h1>
+            <div className="main-rent">
 
-            {rents.map((rent, i) => (
-                <Rent
-                    key={i}
-                    rent={rent}
-                />
-            ))}
-        </div>
+                {rents.map((rent, i) => (
+                    <Rent
+                        key={i}
+                        rent={rent}
+                    />
+                ))}
+            </div>
+        </>
     )
 }
 
@@ -45,7 +47,7 @@ const Rent = ({ rent }) => {
                     <div>
                         <p> <strong>Distancia: </strong>{rent.kms}km </p>
                         <p> <strong>De: </strong> {rent.get_station_name} </p>
-                    <p> <strong>A: </strong> {rent.leave_station_name}</p>
+                        <p> <strong>A: </strong> {rent.leave_station_name}</p>
                     </div>
                 </div>
             )

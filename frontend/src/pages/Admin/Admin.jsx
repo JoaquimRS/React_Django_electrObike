@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import { ThreeDots } from  'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 const Admin = () => {
-    const [main_component, set_main_component] = useState(<Slots />)
+    const [main_component, set_main_component] = useState(<Dashboard />)
     const [loading, set_loading] = useState(false);
     const admin_pages = [
         { icon: <HomeIcon />, name: "Dashboard", component: <Dashboard /> },

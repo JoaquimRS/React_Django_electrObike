@@ -60,7 +60,7 @@ export default function User({ setPage }) {
                     !edit
                         ? <div className="container-buttons-user">
                             <button type="submit">Guardar</button>
-                            <button onClick={handleCancel}>Cancelar</button>
+                            <button className="cancel-button" onClick={handleCancel}>Cancelar</button>
                         </div>
                         : null
                 }

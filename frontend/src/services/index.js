@@ -5,7 +5,7 @@ import bikesService from "./bikesService"
 import notificationsService from "./notificationsService"
 import clientsService from "./clientsService"
 import usersService from "./usersService"
-import incidentService from "./incidentService"
+import incidentsService from "./incidentsService"
 export {
     stationsService,
     rentsService,
@@ -14,5 +14,5 @@ export {
     notificationsService,
     clientsService,
     usersService,
-    incidentService
+    incidentsService
 }
