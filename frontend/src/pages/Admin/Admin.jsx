@@ -13,6 +13,7 @@ import { Bikes, Incidents, Notifications, Rents, Slots, Stations, Clients, Users
 import { useEffect, useState } from 'react';
 import { ThreeDots } from  'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
+import MenuIcon from '@mui/icons-material/Menu';
 const Admin = () => {
     const [main_component, set_main_component] = useState(<Dashboard />)
     const [loading, set_loading] = useState(false);
@@ -38,7 +39,13 @@ const Admin = () => {
 
     return (
         <main className='root-admin'>
+            <input type="checkbox" id="show_nav" className='show-nav'/>
             <div className='nav'>
+                <div className='showButton'>
+                    <label htmlFor="show_nav">
+                        <MenuIcon />
+                    </label>
+                </div>
                 <div className='title' onClick={() => navigate("/home")}>
                     <h1>electr</h1>
                     <img src="/electrObike_icono.png" />
