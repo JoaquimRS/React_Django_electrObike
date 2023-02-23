@@ -9,6 +9,7 @@ import Incidents from "./Incidents";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
     const [page, setPage] = useState('/')
 
@@ -49,7 +50,7 @@ const Profile = () => {
 }
 
 const PageSelected = ({ page, setPage }) => {
-
+    const isAdmin = useSelector(state => state.auth.admin)
     const pages = [
         {
             title: 'Perfil',
@@ -64,6 +65,7 @@ const PageSelected = ({ page, setPage }) => {
             path: '/incidents'
         }
     ]
+    isAdmin ? pages.push({title: 'AdminPanel',path:'admin'}) : null
     switch (page) {
         case '/user':
             return <User setPage={setPage}/>
@@ -86,9 +88,9 @@ const PageSelected = ({ page, setPage }) => {
 
 
 const PageSection = ({ title, path, setPage }) => {
-
+    const navigate = useNavigate()
     const hundleClick = () => {
-        setPage(path)
+        path == "admin" ? navigate("/admin") : setPage(path)
     }
 
 

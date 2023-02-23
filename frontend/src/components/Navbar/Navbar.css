@@ -159,7 +159,7 @@ nav>a>.n-notification {
 
 @media (min-width: 1200px) {
     .navbar-container {
-        height: 8vh;
+        height: 11vh;
         bottom: 30px;
         background-color: transparent;
     }
