@@ -17,7 +17,8 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 user: null,
                 rents: [],
-                incidents: []
+                incidents: [],
+                admin: false
             }
         case 'SET_ADMIN':
             return {

@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import AuthGuard from './services/guards/AuthGuard';
 import NoAuth from './services/guards/NoAuthGuard';
+import AdminGuard from './services/guards/AdminGuard';
 import { AuthContextProvider } from "./context/AuthContext";
 
 import { Navbar } from './components';
@@ -20,6 +21,7 @@ function App() {
         <BrowserRouter>
           <AuthContextProvider>
             <Routes>
+              <Route path={'/'} element={<Home />} />
               <Route path={'/home'}>
                 <Route index element={<Home />} />
                 <Route element={<AuthGuard />}>
@@ -40,7 +42,9 @@ function App() {
 
 
               <Route path='/notification' element={<Notification />} />
-              <Route path='/admin' element={<Admin />} />
+              <Route element={<AdminGuard />}>
+                <Route path='/admin' element={<Admin />} />
+              </Route>
               <Route path={'*'} element={<ErrorNF />} />
             </Routes>
           </AuthContextProvider>

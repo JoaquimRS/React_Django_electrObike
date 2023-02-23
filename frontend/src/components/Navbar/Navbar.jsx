@@ -18,21 +18,23 @@ const Navbar = () => {
     const location = useLocation()
     const activeProfile = ['/profile', '/login', '/register', '/profile/user', '/profile/reservations', '/profile/incidents']
 
+
+
     return !location.pathname.includes('/admin') ? (
         < div className="navbar-container" >
             <nav>
                 <Link to="/notification" className={location.pathname === '/notification' ? 'active' : null}>
                     {client ?
                         <>
-                            <BellRing/>
+                            <BellRing />
                             <div className='n-notification'>
                                 <span>{client.notifications.length > 9 ? "+9" : client.notifications.length}</span>
                             </div>
                         </>
-                        : <Bell/>
+                        : <Bell />
                     }
                 </Link>
-                <Link to="/home" className={location.pathname === '/home' ? 'active' : null}>
+                <Link to="/home" className={location.pathname === '/home' || location.pathname === '/' ? 'active' : null}>
                     <MapIcon />
                 </Link>
                 <Link to="/profile" className={activeProfile.includes(location.pathname) ? 'active' : null}>
