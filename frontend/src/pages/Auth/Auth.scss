@@ -1,8 +1,12 @@
+[class^="main-auth"] * {
+    transition: all ease-in-out .5s;
+}
 [class^="main-auth"] {
     height: 89vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     background-size: cover;
 }
 
@@ -19,11 +23,12 @@
     display: grid;
     place-items: center;
     width: 100%;
+    max-width: 400px;
 
     h1 {
         position: absolute;
-        top: 5%;
-        left: 10%;
+        top: 15px;
+        left: 35px;
         width: 35%;
         color: #19B5F2;
     }
@@ -69,15 +74,14 @@
     height: 90%;
     display: flex;
     justify-content: center;
-    // display: grid;
-    // place-items: center;
     width: 100%;
+    max-width: 400px;
 
     h1 {
         position: absolute;
-        top: 5%;
-        right: 30%;
-        width: 35%;
+        top: 15px;
+        right: 15px;
+        width: fit-content;
         color: #a971ff;
     }
 
@@ -114,5 +118,18 @@
             cursor: pointer;
             margin-top: 5px;
         }
+    }
+}
+
+@media (min-width: 700px) {
+    .container-login, .container-register {
+        border-radius: 20px;
+        form {
+            margin: 0;
+        }
+    }
+    [class^="main-auth"] {
+        height: 100vh;
+        
     }
 }

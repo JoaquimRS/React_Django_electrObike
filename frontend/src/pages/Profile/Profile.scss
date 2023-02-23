@@ -2,6 +2,9 @@
     display: none;
 }
 
+.profile-container * {
+    transition: all ease-in-out .5s;
+}
 button {
     display: inline-block;
     padding: 10px 20px;
@@ -143,6 +146,7 @@ button:hover {
             width: 90%;
             border-radius: 5px;
             font-size: 1.5rem;
+            font-weight: 600;
             padding: 5px;
             padding: 10px;
         }

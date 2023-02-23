@@ -1,3 +1,6 @@
+/* .navbar-container {
+    transition: all ease-in-out .5s;
+} */
 nav>a.active {
     border: 10px solid #e6e4e0;
     box-sizing: content-box;

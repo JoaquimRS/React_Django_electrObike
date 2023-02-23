@@ -1,6 +1,9 @@
 *::-webkit-scrollbar {
     display: none;
 }
+.notifications * {
+    transition: all ease-in-out .5s;
+}
 .notifications {
     background-color: #82b0dd;
     height: 89vh;
