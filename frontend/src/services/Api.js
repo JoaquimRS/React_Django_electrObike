@@ -8,9 +8,9 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 // const dispatch = useDispatch()
 
-// const API_ROOT = "http://localhost:8000/api";
+const API_ROOT = "http://localhost:8000/api";
 // const API_ROOT = "http://172.20.10.2:8000/api";
-const API_ROOT = "http://192.168.137.1:8000/api"
+// const API_ROOT = "http://192.168.137.1:8000/api"
 // const API_ROOT = "http://192.168.56.1:8000/api"
 // const API_ROOT = "http://192.168.1.48:8000/api"
 
@@ -24,7 +24,7 @@ const responseToken = req => {
     }
 
     if (localStorage.adminToken) {
-        req.set('authorization-user', `Bearer ${localStorage.adminToken}`);
+        req.set('AuthorizationUser', `Bearer ${localStorage.adminToken}`);
     }
 }
 

@@ -88,7 +88,7 @@ CORS_ALLOW_HEADERS = [
     "user-agent",
     "x-csrftoken",
     "x-requested-with",
-    "authorization-user"
+    "AuthorizationUser"
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -183,6 +183,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'electrobike.apps.auth.backends.JWTAuthentication',
+        'electrobike.apps.users.backends.JWTAuthenticationUser',
+        'electrobike.apps.auth.backends.JWTAuthenticationClient',
     )
 }
